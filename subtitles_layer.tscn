@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwr1fc68qyhs6"]
+
+[ext_resource type="FontFile" uid="uid://bn1kof63g0ysm" path="res://addons/subtitles/Roboto/Roboto-Medium.ttf" id="1_1rm8x"]
+[ext_resource type="Script" path="res://subtitles_layer.gd" id="1_ibgtb"]
+
+[sub_resource type="Animation" id="Animation_w07ju"]
+resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_ah4mb"]
+resource_name = "new_animation_2"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8f4mg"]
+_data = {
+"new_animation": SubResource("Animation_w07ju"),
+"new_animation_2": SubResource("Animation_ah4mb")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvbup"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.768627)
+
+[sub_resource type="Theme" id="Theme_l7d3e"]
+default_font = ExtResource("1_1rm8x")
+default_font_size = 40
+MarginContainer/constants/margin_bottom = 50
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 50
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_mvbup")
+
+[node name="SubtitlesLayer" type="CanvasLayer"]
+script = ExtResource("1_ibgtb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8f4mg")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_l7d3e")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Subtitle" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[center]sasasasa[/center]"
+fit_content = true
+scroll_active = false

@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://pb42gbcha2bg"]
+
+[ext_resource type="Script" path="res://game.gd" id="1_w8ym6"]
+[ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://subtitles_layer.tscn" id="2_4d5ye"]
+
+[sub_resource type="Animation" id="Animation_u4v26"]
+resource_name = "new_animation"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Panel/aa:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 3.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["test", "test serfghjk"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hn8dn"]
+_data = {
+"new_animation": SubResource("Animation_u4v26")
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_w8ym6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="aa" type="Label" parent="CanvasLayer/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -63.5
+offset_right = 55.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tmp" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "sasasasassasasasasasa"
+fit_content = true
+scroll_following = true
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hn8dn")
+}
+
+[node name="SubtitlesLayer" parent="." instance=ExtResource("2_4d5ye")]
