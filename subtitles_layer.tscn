@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwr1fc68qyhs6"]
+[gd_scene load_steps=10 format=3 uid="uid://dwr1fc68qyhs6"]
 
 [ext_resource type="FontFile" uid="uid://bn1kof63g0ysm" path="res://addons/subtitles/Roboto/Roboto-Medium.ttf" id="1_1rm8x"]
 [ext_resource type="Script" path="res://subtitles_layer.gd" id="1_ibgtb"]
+[ext_resource type="Resource" uid="uid://1e3uvh04ldig" path="res://variable_resources/current_subtitle.tres" id="2_j2whg"]
 
 [sub_resource type="Animation" id="Animation_w07ju"]
 resource_name = "new_animation"
@@ -9,8 +10,24 @@ resource_name = "new_animation"
 [sub_resource type="Animation" id="Animation_ah4mb"]
 resource_name = "new_animation_2"
 
+[sub_resource type="Animation" id="Animation_5ks10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:current_subtitle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_j2whg")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8f4mg"]
 _data = {
+"RESET": SubResource("Animation_5ks10"),
 "new_animation": SubResource("Animation_w07ju"),
 "new_animation_2": SubResource("Animation_ah4mb")
 }
@@ -29,6 +46,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_mvbup")
 
 [node name="SubtitlesLayer" type="CanvasLayer"]
 script = ExtResource("1_ibgtb")
+current_subtitle = ExtResource("2_j2whg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -36,7 +54,9 @@ libraries = {
 "": SubResource("AnimationLibrary_8f4mg")
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ExternalMarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,18 +64,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_l7d3e")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ExternalMarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ExternalMarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Subtitle" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer"]
+[node name="Subtitle" type="RichTextLabel" parent="ExternalMarginContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
-size_flags_vertical = 8
 bbcode_enabled = true
 text = "[center]sasasasa[/center]"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
+
+[node name="Label" type="Label" parent="ExternalMarginContainer/PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "123456"
