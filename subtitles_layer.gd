@@ -2,6 +2,7 @@ extends CanvasLayer
 @onready var animation_player = %AnimationPlayer
 @onready var subtitle : RichTextLabel = %Subtitle
 @onready var external_margin_container = %ExternalMarginContainer
+@export var speech_player : AudioStreamPlayer
 
 func _ready():
 	var data = {
@@ -11,7 +12,8 @@ func _ready():
 		"Name": "display_subtitles", 
 		"Style": "subtitles",
 		"Container": external_margin_container,
-		# "Duration": 15
-	} # Settings which will be passed as an argument.
-	Captions.create(data)
+	}
+	Captions.generate_animation(data)
 	animation_player.play("display_subtitles")
+	if speech_player:
+		speech_player.play()
