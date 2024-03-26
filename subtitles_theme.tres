@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://4vu4f0juq27b"]
+
+[ext_resource type="FontFile" uid="uid://bn1kof63g0ysm" path="res://addons/subtitles/Roboto/Roboto-Medium.ttf" id="1_6etbq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvbup"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+default_font = ExtResource("1_6etbq")
+default_font_size = 40
+ExternalMarginContainer/base_type = &"MarginContainer"
+InternalMarginContainer/base_type = &"MarginContainer"
+InternalMarginContainer/constants/margin_bottom = 10
+InternalMarginContainer/constants/margin_left = 10
+InternalMarginContainer/constants/margin_right = 10
+InternalMarginContainer/constants/margin_top = 10
+MarginContainer/constants/margin_bottom = 50
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 50
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_mvbup")

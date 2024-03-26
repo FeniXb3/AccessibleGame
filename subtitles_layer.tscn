@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwr1fc68qyhs6"]
+[gd_scene load_steps=8 format=3 uid="uid://dwr1fc68qyhs6"]
 
-[ext_resource type="FontFile" uid="uid://bn1kof63g0ysm" path="res://addons/subtitles/Roboto/Roboto-Medium.ttf" id="1_1rm8x"]
 [ext_resource type="Script" path="res://subtitles_layer.gd" id="1_ibgtb"]
 [ext_resource type="Resource" uid="uid://1e3uvh04ldig" path="res://variable_resources/current_subtitle.tres" id="2_j2whg"]
+[ext_resource type="Theme" uid="uid://4vu4f0juq27b" path="res://subtitles_theme.tres" id="3_gd8q5"]
 
 [sub_resource type="Animation" id="Animation_w07ju"]
 resource_name = "new_animation"
@@ -32,21 +32,8 @@ _data = {
 "new_animation_2": SubResource("Animation_ah4mb")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvbup"]
-bg_color = Color(0.152941, 0.152941, 0.152941, 0.768627)
-
-[sub_resource type="Theme" id="Theme_l7d3e"]
-default_font = ExtResource("1_1rm8x")
-default_font_size = 40
-MarginContainer/constants/margin_bottom = 50
-MarginContainer/constants/margin_left = 50
-MarginContainer/constants/margin_right = 50
-MarginContainer/constants/margin_top = 50
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_mvbup")
-
 [node name="SubtitlesLayer" type="CanvasLayer"]
 script = ExtResource("1_ibgtb")
-current_subtitle = ExtResource("2_j2whg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -62,7 +49,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_l7d3e")
+theme = ExtResource("3_gd8q5")
 
 [node name="PanelContainer" type="PanelContainer" parent="ExternalMarginContainer"]
 layout_mode = 2
@@ -71,11 +58,13 @@ size_flags_vertical = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="ExternalMarginContainer/PanelContainer"]
 layout_mode = 2
+theme_type_variation = &"InternalMarginContainer"
 
 [node name="Subtitle" type="RichTextLabel" parent="ExternalMarginContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
+size_flags_vertical = 8
 bbcode_enabled = true
 text = "[center]sasasasa[/center]"
 fit_content = true
@@ -83,7 +72,10 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Label" type="Label" parent="ExternalMarginContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 8
 text = "123456"
+autowrap_mode = 2
