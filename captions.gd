@@ -1,4 +1,7 @@
 extends Node
+# Based on Godot Speech To Subtitles by 10thello
+# MIT license
+# https://github.com/FeniXb3/godot-speech-to-subtitles
 
 func generate_animation(data: Dictionary) -> Animation:
 	var caption_fields := read_and_parse(data["TextPath"])
