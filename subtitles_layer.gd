@@ -7,7 +7,9 @@ extends CanvasLayer
 
 func _ready():
 	external_margin_container.theme = theme
-	
+	var panel_stylebox : StyleBoxFlat = theme.get_stylebox("panel", "PanelContainer")
+	print(panel_stylebox.bg_color)
+	panel_stylebox.bg_color = Color.RED
 	var data = {
 		"TextPath": "res://star_wars_example.txt", 
 		"Label": subtitle,
@@ -30,3 +32,8 @@ func _process(delta):
 		var current_font_size := theme.default_font_size
 		print(current_font_size)
 		theme.default_font_size -= 10
+	elif Input.is_action_just_pressed("ui_accept"):
+		theme.set_constant("margin_bottom", "MarginContainer", 300)
+		
+		
+	
