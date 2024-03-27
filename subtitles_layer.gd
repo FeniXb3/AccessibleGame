@@ -5,11 +5,16 @@ extends CanvasLayer
 @export var theme : Theme
 @export var speech_player : AudioStreamPlayer
 
+
 func _ready():
+	Captions.subtitle_creation_requested.connect(_on_subtitle_creation_requested)
+	Captions.subtitle_play_requested.connect(_on_subtitle_play_requested)
+	
 	external_margin_container.theme = theme
 	var panel_stylebox : StyleBoxFlat = theme.get_stylebox("panel", "PanelContainer")
-	print(panel_stylebox.bg_color)
 	panel_stylebox.bg_color = Color.RED
+
+func _play_example():
 	var data = {
 		"TextPath": "res://star_wars_example.txt", 
 		"Label": subtitle,
@@ -22,6 +27,30 @@ func _ready():
 	animation_player.play("display_subtitles")
 	if speech_player:
 		speech_player.play()
+
+# TODO
+# create signal for playing subtitles animation with specific name (maybe taken from the name of audio file?
+# create subtitles menu draft - changing font with size, outline and shadow, changing panel color and corners, changing margins 
+
+func _on_subtitle_creation_requested(text_path: String, animation_name : String):
+	assert(text_path, "SRT text or file path is required to create subtitles")
+	assert(animation_name, "Subtitle animation name is required to distinguish different subtitles")
+	assert(not animation_player.has_animation(animation_name), "Animation with this name already exists")
+	
+	var data = {
+		"TextPath": text_path, 
+		"Name": animation_name, 
+		"Label": subtitle,
+		"AnimationPlayer": animation_player, 
+		"Style": "subtitles",
+		"Container": external_margin_container,
+	}
+	Captions.generate_animation(data)
+
+func _on_subtitle_play_requested(animation_name: String):
+	assert(animation_name, "Subtitle animation name is required to play it")
+	
+	animation_player.play(animation_name)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):

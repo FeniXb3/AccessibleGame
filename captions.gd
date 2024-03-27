@@ -3,7 +3,13 @@ extends Node
 # MIT license
 # https://github.com/FeniXb3/godot-speech-to-subtitles
 
+
+signal subtitle_creation_requested(text_path: String, animation_name : String)
+signal subtitle_play_requested(animation_name: String)
+
 func generate_animation(data: Dictionary) -> Animation:
+	assert(data.get("TextPath"), "TextPath is required")
+	assert(data.get("Label"), "Label is required")
 	var caption_fields := read_and_parse(data["TextPath"])
 
 	match data.get("Style", "letters").to_lower():
