@@ -1,0 +1,90 @@
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://m1g2vad5m2s2"]
+
+[ext_resource type="Texture2D" uid="uid://ddsr7u0gk1l8r" path="res://addons/kenney_ui_pack/PNG/grey_button07.png" id="1_s0sux"]
+[ext_resource type="Texture2D" uid="uid://dvtub7vf7ujmd" path="res://addons/kenney_ui_pack/PNG/yellow_button07.png" id="2_ri02r"]
+[ext_resource type="Texture2D" uid="uid://dk3p17n507c2h" path="res://addons/kenney_ui_pack/PNG/blue_button09.png" id="3_ep1h0"]
+[ext_resource type="Texture2D" uid="uid://cjjb4yvy34m2h" path="res://addons/kenney_ui_pack/PNG/blue_button07.png" id="3_naeuk"]
+[ext_resource type="Texture2D" uid="uid://c6hhncdcmld6v" path="res://addons/kenney_ui_pack/PNG/blue_button08.png" id="4_x04dm"]
+[ext_resource type="FontFile" uid="uid://d3wcl8wjfjcsn" path="res://addons/kenney_ui_pack/Font/kenvector_future_thin.ttf" id="5_mhhlw"]
+[ext_resource type="Texture2D" uid="uid://dtn2ys2fb36rr" path="res://addons/kenney_ui_pack/PNG/grey_panel.png" id="6_ebn1x"]
+[ext_resource type="Texture2D" uid="uid://d1l7aksanhv7d" path="res://addons/kenney_ui_pack/PNG/yellow_button06.png" id="7_xven6"]
+[ext_resource type="Texture2D" uid="uid://fybggkq0j1gh" path="res://addons/kenney_ui_pack/PNG/grey_button05.png" id="8_rplfq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3w37"]
+texture = ExtResource("1_s0sux")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.258824)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iwctx"]
+texture = ExtResource("2_ri02r")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nnc5m"]
+texture = ExtResource("3_ep1h0")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0wlm0"]
+texture = ExtResource("3_naeuk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lnpwu"]
+texture = ExtResource("4_x04dm")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvqef"]
+texture = ExtResource("6_ebn1x")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_minn5"]
+texture = ExtResource("7_xven6")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uudl"]
+texture = ExtResource("8_rplfq")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[resource]
+default_font = ExtResource("5_mhhlw")
+Button/colors/font_focus_color = Color(0.584314, 0.470588, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.584314, 0.470588, 0, 1)
+Button/colors/font_pressed_color = Color(0.584314, 0.470588, 0, 1)
+Button/styles/disabled = SubResource("StyleBoxTexture_r3w37")
+Button/styles/focus = SubResource("StyleBoxTexture_iwctx")
+Button/styles/hover = SubResource("StyleBoxTexture_nnc5m")
+Button/styles/normal = SubResource("StyleBoxTexture_0wlm0")
+Button/styles/pressed = SubResource("StyleBoxTexture_lnpwu")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_vvqef")
+TextEdit/colors/caret_color = Color(0.513726, 0.505882, 0.505882, 1)
+TextEdit/colors/font_color = Color(0.513726, 0.505882, 0.505882, 1)
+TextEdit/colors/font_placeholder_color = Color(0.592157, 0.592157, 0.592157, 0.6)
+TextEdit/colors/selection_color = Color(0.713726, 0.576471, 0, 0.623529)
+TextEdit/styles/focus = SubResource("StyleBoxTexture_minn5")
+TextEdit/styles/normal = SubResource("StyleBoxTexture_3uudl")

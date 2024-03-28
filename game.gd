@@ -11,3 +11,8 @@ func _on_create_pressed():
 
 func _on_play_pressed():
 	Captions.subtitle_play_requested.emit(animation_name.text)
+
+
+func _on_prepare_example_pressed():
+	text_path.text = "res://star_wars_example.txt"
+	animation_name.text = "example"

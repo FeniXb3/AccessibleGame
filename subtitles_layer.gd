@@ -52,7 +52,7 @@ func _on_subtitle_play_requested(animation_name: String):
 	
 	animation_player.play(animation_name)
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_up"):
 		var current_font_size := theme.default_font_size
 		print(current_font_size)
