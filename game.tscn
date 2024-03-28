@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game.gd" id="1_w8ym6"]
 [ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://subtitles_layer.tscn" id="2_4d5ye"]
-[ext_resource type="Theme" uid="uid://m1g2vad5m2s2" path="res://addons/kenney_ui_pack/kenney_ui_pack_theme.tres" id="3_j8ojw"]
+[ext_resource type="PackedScene" uid="uid://ce7a7xsoyrdu7" path="res://subtitle_tester.tscn" id="3_6k828"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_w8ym6")
@@ -11,73 +11,16 @@ script = ExtResource("1_w8ym6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="SubtitleTester" parent="CanvasLayer" instance=ExtResource("3_6k828")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -119.0
-offset_right = 55.0
-offset_bottom = 120.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-theme = ExtResource("3_j8ojw")
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="TextPath" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-placeholder_text = "SRT text/path"
-
-[node name="AnimationName" type="LineEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 8
-placeholder_text = "Animation name"
-
-[node name="PrepareExample" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Prepare example data"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="Create" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Create"
-
-[node name="Play" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Play"
-
-[node name="Spacer2" type="Control" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/PrepareExample" to="." method="_on_prepare_example_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Play" to="." method="_on_play_pressed"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0

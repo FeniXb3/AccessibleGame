@@ -22,3 +22,7 @@ Captions="*res://captions.gd"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/subtitles/plugin.cfg")
+
+[gui]
+
+theme/custom="res://addons/kenney_ui_pack/kenney_ui_pack_theme.tres"
