@@ -6,6 +6,9 @@ extends Node2D
 @export var font_color : ColorVariable
 @export var outline_color : ColorVariable
 @export var outline_size : IntVariable
+@export var external_margin : IntVariable
+@export var internal_margin : IntVariable
+@export var corners_radius : IntVariable
 
 func _ready():
 	_setup_subtitles_settings()
@@ -14,6 +17,9 @@ func _ready():
 	font_color.value_changed.connect(_on_font_color_value_changed)
 	outline_color.value_changed.connect(_on_outline_color_value_changed)
 	outline_size.value_changed.connect(_on_outline_size_value_changed)
+	external_margin.value_changed.connect(_on_external_margin_value_changed)
+	internal_margin.value_changed.connect(_on_internal_margin_value_changed)
+	corners_radius.value_changed.connect(_on_corners_radius_value_changed)
 
 func _setup_subtitles_settings() -> void:
 	font_size.value = subtitles_theme.default_font_size
@@ -21,6 +27,9 @@ func _setup_subtitles_settings() -> void:
 	font_color.value = subtitles_theme.get_color("default_color", "RichTextLabel")
 	outline_color.value = subtitles_theme.get_color("font_outline_color", "RichTextLabel")
 	outline_size.value = subtitles_theme.get_constant("outline_size", "RichTextLabel")
+	external_margin.value = subtitles_theme.get_constant("margin_bottom", "MarginContainer")
+	internal_margin.value = subtitles_theme.get_constant("margin_bottom", "InternalMarginContainer")
+	corners_radius.value = subtitles_theme.get_stylebox("panel", "PanelContainer").corner_radius_bottom_left
 
 func _on_font_size_value_changed(new_value : int) -> void:
 	subtitles_theme.default_font_size = new_value
@@ -36,3 +45,27 @@ func _on_outline_color_value_changed(new_value : Color) -> void:
 
 func _on_outline_size_value_changed(new_value : int) -> void:
 	subtitles_theme.set_constant("outline_size", "RichTextLabel", new_value)
+
+
+func _on_external_margin_value_changed(new_value : int) -> void:
+	_set_all_margins_to("MarginContainer", new_value)
+	
+
+func _on_internal_margin_value_changed(new_value : int) -> void:
+	_set_all_margins_to("InternalMarginContainer", new_value)
+	
+func _set_all_margins_to(container_type : String, margin_value : int) -> void:
+	subtitles_theme.set_constant("margin_bottom", container_type, margin_value)
+	subtitles_theme.set_constant("margin_top", container_type, margin_value)
+	subtitles_theme.set_constant("margin_left", container_type, margin_value)
+	subtitles_theme.set_constant("margin_right", container_type, margin_value)
+
+func _on_corners_radius_value_changed(new_value : int) -> void:
+	_set_all_corners("Panel", new_value)
+
+func _set_all_corners(container_type : String, radius : int) -> void:
+	var stylebox : StyleBoxFlat = subtitles_theme.get_stylebox("panel", "PanelContainer")
+	stylebox.corner_radius_bottom_left = radius
+	stylebox.corner_radius_bottom_right = radius
+	stylebox.corner_radius_top_left = radius
+	stylebox.corner_radius_top_right = radius

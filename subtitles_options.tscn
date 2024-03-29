@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dg0sj2af7ufac"]
+[gd_scene load_steps=12 format=3 uid="uid://dg0sj2af7ufac"]
 
 [ext_resource type="Script" path="res://subtitles_options.gd" id="1_2agnd"]
 [ext_resource type="PackedScene" uid="uid://cjtl0cm3jtjev" path="res://color_option.tscn" id="2_0co88"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://c4bg4uvsekuxa" path="res://range_option.tscn" id="6_jeppa"]
 [ext_resource type="Resource" uid="uid://cqffss0kui1ur" path="res://variable_resources/font_size.tres" id="7_l5ygp"]
 [ext_resource type="Resource" uid="uid://dmidi8q3yv828" path="res://variable_resources/outline_size.tres" id="7_nxeqw"]
+[ext_resource type="Resource" uid="uid://bh5x1rpfhp5hk" path="res://variable_resources/internal_margin.tres" id="9_7wxty"]
+[ext_resource type="Resource" uid="uid://cbphqr0cs3f2e" path="res://variable_resources/external_margin.tres" id="10_fbsy6"]
+[ext_resource type="Resource" uid="uid://rjxbhcam7ei1" path="res://variable_resources/corners_radius.tres" id="11_n54at"]
 
 [node name="SubtitlesOptions" type="PanelContainer"]
 offset_right = 40.0
@@ -48,6 +51,24 @@ color_variable = ExtResource("4_wjlck")
 layout_mode = 2
 color_label_text = "Background color"
 color_variable = ExtResource("3_bleap")
+
+[node name="InternalMargin" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+layout_mode = 2
+label_text = "Internal margin"
+variable = ExtResource("9_7wxty")
+max_value = 30
+
+[node name="ExternalMargin" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+layout_mode = 2
+label_text = "External margin"
+variable = ExtResource("10_fbsy6")
+max_value = 300
+
+[node name="CornersRadius" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+layout_mode = 2
+label_text = "Corners radius"
+variable = ExtResource("11_n54at")
+max_value = 20
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 visible = false

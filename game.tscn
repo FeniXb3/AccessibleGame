@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pb42gbcha2bg"]
+[gd_scene load_steps=14 format=3 uid="uid://pb42gbcha2bg"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_w8ym6"]
 [ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://subtitles_layer.tscn" id="2_4d5ye"]
@@ -10,6 +10,9 @@
 [ext_resource type="Resource" uid="uid://c1x0uqbqesj8m" path="res://variable_resources/font_color.tres" id="5_3jnah"]
 [ext_resource type="Resource" uid="uid://daoqrpi40vfol" path="res://variable_resources/outline_color.tres" id="6_rmrga"]
 [ext_resource type="Resource" uid="uid://dmidi8q3yv828" path="res://variable_resources/outline_size.tres" id="7_5fo62"]
+[ext_resource type="Resource" uid="uid://cbphqr0cs3f2e" path="res://variable_resources/external_margin.tres" id="8_gjit3"]
+[ext_resource type="Resource" uid="uid://bh5x1rpfhp5hk" path="res://variable_resources/internal_margin.tres" id="9_q7snq"]
+[ext_resource type="Resource" uid="uid://rjxbhcam7ei1" path="res://variable_resources/corners_radius.tres" id="10_erbub"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_w8ym6")
@@ -19,6 +22,9 @@ background_color = ExtResource("4_8ddjt")
 font_color = ExtResource("5_3jnah")
 outline_color = ExtResource("6_rmrga")
 outline_size = ExtResource("7_5fo62")
+external_margin = ExtResource("8_gjit3")
+internal_margin = ExtResource("9_q7snq")
+corners_radius = ExtResource("10_erbub")
 
 [node name="SubtitlesLayer" parent="." instance=ExtResource("2_4d5ye")]
 
