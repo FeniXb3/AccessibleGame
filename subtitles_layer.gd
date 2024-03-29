@@ -11,9 +11,7 @@ func _ready():
 	Captions.subtitle_play_requested.connect(_on_subtitle_play_requested)
 	
 	external_margin_container.theme = theme
-	var panel_stylebox : StyleBoxFlat = theme.get_stylebox("panel", "PanelContainer")
-	panel_stylebox.bg_color = Color.RED
-
+	
 func _play_example():
 	var data = {
 		"TextPath": "res://star_wars_example.txt", 
@@ -51,18 +49,18 @@ func _on_subtitle_play_requested(animation_name: String):
 	assert(animation_name, "Subtitle animation name is required to play it")
 	
 	animation_player.play(animation_name)
-
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_up"):
-		var current_font_size := theme.default_font_size
-		print(current_font_size)
-		theme.default_font_size += 10
-	elif Input.is_action_just_pressed("ui_down"):
-		var current_font_size := theme.default_font_size
-		print(current_font_size)
-		theme.default_font_size -= 10
-	elif Input.is_action_just_pressed("ui_accept"):
-		theme.set_constant("margin_bottom", "MarginContainer", 300)
+#
+#func _process(_delta):
+	#if Input.is_action_just_pressed("ui_up"):
+		#var current_font_size := theme.default_font_size
+		#print(current_font_size)
+		#theme.default_font_size += 10
+	#elif Input.is_action_just_pressed("ui_down"):
+		#var current_font_size := theme.default_font_size
+		#print(current_font_size)
+		#theme.default_font_size -= 10
+	#elif Input.is_action_just_pressed("ui_accept"):
+		#theme.set_constant("margin_bottom", "MarginContainer", 300)
 		
 		
 	

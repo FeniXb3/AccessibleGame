@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg0sj2af7ufac"]
+
+[ext_resource type="Script" path="res://subtitles_options.gd" id="1_2agnd"]
+[ext_resource type="PackedScene" uid="uid://cjtl0cm3jtjev" path="res://color_option.tscn" id="2_0co88"]
+[ext_resource type="Resource" uid="uid://ccbgoiyacwxmf" path="res://variable_resources/background_color.tres" id="3_bleap"]
+[ext_resource type="Resource" uid="uid://c1x0uqbqesj8m" path="res://variable_resources/font_color.tres" id="3_fr7fj"]
+[ext_resource type="Resource" uid="uid://daoqrpi40vfol" path="res://variable_resources/outline_color.tres" id="4_wjlck"]
+[ext_resource type="PackedScene" uid="uid://c4bg4uvsekuxa" path="res://range_option.tscn" id="6_jeppa"]
+[ext_resource type="Resource" uid="uid://cqffss0kui1ur" path="res://variable_resources/font_size.tres" id="7_l5ygp"]
+[ext_resource type="Resource" uid="uid://dmidi8q3yv828" path="res://variable_resources/outline_size.tres" id="7_nxeqw"]
+
+[node name="SubtitlesOptions" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2agnd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="FontSize" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+layout_mode = 2
+label_text = "Font size"
+variable = ExtResource("7_l5ygp")
+min_value = 30
+max_value = 80
+step = 5
+
+[node name="FontColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+layout_mode = 2
+color_label_text = "Font color"
+color_variable = ExtResource("3_fr7fj")
+
+[node name="OutlineSize" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+layout_mode = 2
+label_text = "Outline size"
+variable = ExtResource("7_nxeqw")
+max_value = 10
+
+[node name="OutlineColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+layout_mode = 2
+color_label_text = "Outline color"
+color_variable = ExtResource("4_wjlck")
+
+[node name="BackgroundColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+layout_mode = 2
+color_label_text = "Background color"
+color_variable = ExtResource("3_bleap")
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="FontSizeLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Font size"
+
+[node name="FontSizeSpinBox" type="SpinBox" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+min_value = 30.0
+value = 30.0
+suffix = "px"
+custom_arrow_step = 5.0
+select_all_on_focus = true
+
+[node name="FontSizeSlider" type="HSlider" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 30.0
+max_value = 80.0
+step = 5.0
+value = 40.0
+ticks_on_borders = true
+
+[connection signal="value_changed" from="MarginContainer/GridContainer/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/FontSizeSlider" to="." method="_on_font_size_slider_value_changed"]

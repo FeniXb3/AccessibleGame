@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4bg4uvsekuxa"]
+
+[ext_resource type="Script" path="res://range_option.gd" id="1_nggj4"]
+
+[node name="RangeOption" type="HBoxContainer"]
+script = ExtResource("1_nggj4")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "range label"
+
+[node name="RangeSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+ticks_on_borders = true
+
+[connection signal="value_changed" from="RangeSlider" to="." method="_on_range_slider_value_changed"]

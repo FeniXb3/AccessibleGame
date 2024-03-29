@@ -23,3 +23,6 @@ MarginContainer/constants/margin_left = 50
 MarginContainer/constants/margin_right = 50
 MarginContainer/constants/margin_top = 50
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_mvbup")
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(1, 0, 1, 1)
+RichTextLabel/constants/outline_size = 0
