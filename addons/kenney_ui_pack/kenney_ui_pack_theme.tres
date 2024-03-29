@@ -75,13 +75,18 @@ texture = ExtResource("8_3okk0")
 modulate_color = Color(0.117647, 0.654902, 0.882353, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7qjc"]
+texture = ExtResource("7_djm66")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvqef"]
 texture = ExtResource("7_djm66")
-texture_margin_left = 10.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 10.0
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uudl"]
 texture = ExtResource("8_rplfq")
