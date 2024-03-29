@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=27 format=3 uid="uid://ba8i4rpswi2cf"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://ba8i4rpswi2cf"]
 
 [ext_resource type="Texture2D" uid="uid://ddsr7u0gk1l8r" path="res://addons/kenney_ui_pack/PNG/grey_button07.png" id="1_s0sux"]
 [ext_resource type="Texture2D" uid="uid://bc2n1qu50qdh5" path="res://addons/kenney_ui_pack/PNG/blue_button06.png" id="2_lmr31"]
@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dk3p17n507c2h" path="res://addons/kenney_ui_pack/PNG/blue_button09.png" id="6_5gqs2"]
 [ext_resource type="Texture2D" uid="uid://vo72m0k2dqu1" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown.png" id="6_6fum7"]
 [ext_resource type="Texture2D" uid="uid://dpxkpxxo8c5jo" path="res://addons/kenney_ui_pack/PNG/blue_button10.png" id="6_n5kvk"]
-[ext_resource type="Texture2D" uid="uid://8b0jhut6jsiu" path="res://addons/kenney_ui_pack/PNG/blue_panel.png" id="7_djm66"]
 [ext_resource type="Texture2D" uid="uid://0k0686ehcopl" path="res://addons/kenney_ui_pack/PNG/grey_sliderHorizontal.png" id="8_3okk0"]
 [ext_resource type="Texture2D" uid="uid://fybggkq0j1gh" path="res://addons/kenney_ui_pack/PNG/grey_button05.png" id="8_rplfq"]
 [ext_resource type="Texture2D" uid="uid://b8ukwyeksi4xd" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown_border.png" id="9_4awpq"]
 [ext_resource type="Texture2D" uid="uid://dtmj1d4ree17b" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown_desaturated.png" id="9_17idm"]
+[ext_resource type="StyleBox" uid="uid://5p6pekcm3ixi" path="res://addons/kenney_ui_pack/panel_style_box_texture.tres" id="12_ywcnk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3w37"]
 texture = ExtResource("1_s0sux")
@@ -74,20 +74,6 @@ content_margin_bottom = 1.0
 texture = ExtResource("8_3okk0")
 modulate_color = Color(0.117647, 0.654902, 0.882353, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7qjc"]
-texture = ExtResource("7_djm66")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvqef"]
-texture = ExtResource("7_djm66")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uudl"]
 texture = ExtResource("8_rplfq")
 texture_margin_left = 9.0
@@ -118,8 +104,9 @@ MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
 MarginContainer/constants/margin_right = 10
 MarginContainer/constants/margin_top = 10
-Panel/styles/panel = SubResource("StyleBoxTexture_h7qjc")
-PanelContainer/styles/panel = SubResource("StyleBoxTexture_vvqef")
+Panel/styles/panel = ExtResource("12_ywcnk")
+PanelContainer/styles/panel = ExtResource("12_ywcnk")
+PopupPanel/styles/panel = ExtResource("12_ywcnk")
 TextEdit/colors/caret_color = Color(0.513726, 0.505882, 0.505882, 1)
 TextEdit/colors/font_color = Color(0.513726, 0.505882, 0.505882, 1)
 TextEdit/colors/font_placeholder_color = Color(0.592157, 0.592157, 0.592157, 0.6)
