@@ -23,6 +23,15 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Subtitles settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="FontSize" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Font size"
@@ -69,35 +78,3 @@ layout_mode = 2
 label_text = "Corners radius"
 variable = ExtResource("11_n54at")
 max_value = 20
-
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
-visible = false
-layout_mode = 2
-columns = 2
-
-[node name="FontSizeLabel" type="Label" parent="MarginContainer/GridContainer"]
-layout_mode = 2
-text = "Font size"
-
-[node name="FontSizeSpinBox" type="SpinBox" parent="MarginContainer/GridContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-min_value = 30.0
-value = 30.0
-suffix = "px"
-custom_arrow_step = 5.0
-select_all_on_focus = true
-
-[node name="FontSizeSlider" type="HSlider" parent="MarginContainer/GridContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-min_value = 30.0
-max_value = 80.0
-step = 5.0
-value = 40.0
-ticks_on_borders = true
-
-[connection signal="value_changed" from="MarginContainer/GridContainer/FontSizeSpinBox" to="." method="_on_font_size_spin_box_value_changed"]
-[connection signal="value_changed" from="MarginContainer/GridContainer/FontSizeSlider" to="." method="_on_font_size_slider_value_changed"]

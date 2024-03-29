@@ -34,10 +34,5 @@ corners_radius = ExtResource("10_erbub")
 size_flags_horizontal = 0
 
 [node name="SubtitlesOptions" parent="CanvasLayer" instance=ExtResource("4_yqtv3")]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -118.0
-offset_right = 262.0
-offset_bottom = 118.0
-grow_vertical = 2
+offset_right = 349.0
+offset_bottom = 418.0

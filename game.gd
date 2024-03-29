@@ -61,10 +61,10 @@ func _set_all_margins_to(container_type : String, margin_value : int) -> void:
 	subtitles_theme.set_constant("margin_right", container_type, margin_value)
 
 func _on_corners_radius_value_changed(new_value : int) -> void:
-	_set_all_corners("Panel", new_value)
+	_set_all_corners("PanelContainer", "panel", new_value)
 
-func _set_all_corners(container_type : String, radius : int) -> void:
-	var stylebox : StyleBoxFlat = subtitles_theme.get_stylebox("panel", "PanelContainer")
+func _set_all_corners(container_type : String, style_box_name: String, radius : int) -> void:
+	var stylebox : StyleBoxFlat = subtitles_theme.get_stylebox(style_box_name, container_type)
 	stylebox.corner_radius_bottom_left = radius
 	stylebox.corner_radius_bottom_right = radius
 	stylebox.corner_radius_top_left = radius
