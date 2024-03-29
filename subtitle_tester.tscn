@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce7a7xsoyrdu7"]
+[gd_scene load_steps=2 format=3 uid="uid://ce7a7xsoyrdu7"]
 
-[ext_resource type="Theme" uid="uid://ba8i4rpswi2cf" path="res://addons/kenney_ui_pack/kenney_ui_pack_theme.tres" id="1_85pro"]
 [ext_resource type="Script" path="res://subtitle_tester.gd" id="2_wy01i"]
 
 [node name="SubtitleTester" type="Control"]
@@ -10,7 +9,6 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 size_flags_vertical = 0
-theme = ExtResource("1_85pro")
 script = ExtResource("2_wy01i")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
