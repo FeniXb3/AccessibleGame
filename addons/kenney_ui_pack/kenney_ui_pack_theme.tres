@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=3 uid="uid://ba8i4rpswi2cf"]
+[gd_resource type="Theme" load_steps=27 format=3 uid="uid://ba8i4rpswi2cf"]
 
 [ext_resource type="Texture2D" uid="uid://ddsr7u0gk1l8r" path="res://addons/kenney_ui_pack/PNG/grey_button07.png" id="1_s0sux"]
 [ext_resource type="Texture2D" uid="uid://bc2n1qu50qdh5" path="res://addons/kenney_ui_pack/PNG/blue_button06.png" id="2_lmr31"]
@@ -6,8 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cjjb4yvy34m2h" path="res://addons/kenney_ui_pack/PNG/blue_button07.png" id="3_naeuk"]
 [ext_resource type="Texture2D" uid="uid://c6hhncdcmld6v" path="res://addons/kenney_ui_pack/PNG/blue_button08.png" id="4_x04dm"]
 [ext_resource type="FontFile" uid="uid://d3wcl8wjfjcsn" path="res://addons/kenney_ui_pack/Font/kenvector_future_thin.ttf" id="5_mhhlw"]
-[ext_resource type="Texture2D" uid="uid://dtn2ys2fb36rr" path="res://addons/kenney_ui_pack/PNG/grey_panel.png" id="6_ebn1x"]
+[ext_resource type="Texture2D" uid="uid://dk3p17n507c2h" path="res://addons/kenney_ui_pack/PNG/blue_button09.png" id="6_5gqs2"]
+[ext_resource type="Texture2D" uid="uid://vo72m0k2dqu1" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown.png" id="6_6fum7"]
+[ext_resource type="Texture2D" uid="uid://dpxkpxxo8c5jo" path="res://addons/kenney_ui_pack/PNG/blue_button10.png" id="6_n5kvk"]
+[ext_resource type="Texture2D" uid="uid://8b0jhut6jsiu" path="res://addons/kenney_ui_pack/PNG/blue_panel.png" id="7_djm66"]
+[ext_resource type="Texture2D" uid="uid://0k0686ehcopl" path="res://addons/kenney_ui_pack/PNG/grey_sliderHorizontal.png" id="8_3okk0"]
 [ext_resource type="Texture2D" uid="uid://fybggkq0j1gh" path="res://addons/kenney_ui_pack/PNG/grey_button05.png" id="8_rplfq"]
+[ext_resource type="Texture2D" uid="uid://b8ukwyeksi4xd" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown_border.png" id="9_4awpq"]
+[ext_resource type="Texture2D" uid="uid://dtmj1d4ree17b" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown_desaturated.png" id="9_17idm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3w37"]
 texture = ExtResource("1_s0sux")
@@ -38,10 +44,40 @@ texture_margin_top = 4.0
 texture_margin_right = 6.0
 texture_margin_bottom = 5.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_at1km"]
+texture = ExtResource("6_5gqs2")
+texture_margin_left = 6.0
+texture_margin_top = 5.0
+texture_margin_right = 6.0
+texture_margin_bottom = 9.0
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmomt"]
+texture = ExtResource("6_n5kvk")
+texture_margin_left = 6.0
+texture_margin_top = 5.0
+texture_margin_right = 6.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6i15r"]
+texture = ExtResource("8_3okk0")
+modulate_color = Color(0.490436, 0.816678, 0.993024, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0iagi"]
+texture = ExtResource("8_3okk0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v21pa"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+texture = ExtResource("8_3okk0")
+modulate_color = Color(0.117647, 0.654902, 0.882353, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7qjc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvqef"]
-texture = ExtResource("6_ebn1x")
+texture = ExtResource("7_djm66")
 texture_margin_left = 10.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
@@ -62,6 +98,16 @@ Button/styles/focus = ExtResource("2_wkuf1")
 Button/styles/hover = SubResource("StyleBoxTexture_nnc5m")
 Button/styles/normal = SubResource("StyleBoxTexture_0wlm0")
 Button/styles/pressed = SubResource("StyleBoxTexture_lnpwu")
+ColorPickerButton/styles/normal = SubResource("StyleBoxTexture_at1km")
+ColorPickerButton/styles/pressed = SubResource("StyleBoxTexture_nmomt")
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = ExtResource("6_6fum7")
+HSlider/icons/grabber_disabled = ExtResource("9_17idm")
+HSlider/icons/grabber_highlight = ExtResource("9_4awpq")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_6i15r")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_0iagi")
+HSlider/styles/slider = SubResource("StyleBoxTexture_v21pa")
 LineEdit/styles/focus = ExtResource("2_wkuf1")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
