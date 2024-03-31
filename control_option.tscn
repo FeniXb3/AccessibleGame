@@ -17,11 +17,11 @@ size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+theme_type_variation = &"InputControlIconButton"
 text = " "
 icon = ExtResource("2_5hghf")
-flat = true
 icon_alignment = 1
 expand_icon = true
 

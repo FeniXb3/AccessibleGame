@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=3 uid="uid://ba8i4rpswi2cf"]
+[gd_resource type="Theme" load_steps=28 format=3 uid="uid://ba8i4rpswi2cf"]
 
 [ext_resource type="Texture2D" uid="uid://ddsr7u0gk1l8r" path="res://addons/kenney_ui_pack/PNG/grey_button07.png" id="1_s0sux"]
 [ext_resource type="Texture2D" uid="uid://bc2n1qu50qdh5" path="res://addons/kenney_ui_pack/PNG/blue_button06.png" id="2_lmr31"]
@@ -74,6 +74,33 @@ content_margin_bottom = 1.0
 texture = ExtResource("8_3okk0")
 modulate_color = Color(0.117647, 0.654902, 0.882353, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1s8fq"]
+bg_color = Color(0.372549, 0.780392, 0.988235, 1)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.374337, 0.779476, 0.986941, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fw307"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndp5i"]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0202795, 0.330816, 0.457248, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3uudl"]
 texture = ExtResource("8_rplfq")
 texture_margin_left = 9.0
@@ -99,6 +126,11 @@ HSlider/icons/grabber_highlight = ExtResource("9_4awpq")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_6i15r")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_0iagi")
 HSlider/styles/slider = SubResource("StyleBoxTexture_v21pa")
+InputControlIconButton/base_type = &"Button"
+InputControlIconButton/colors/font_hover_color = Color(1, 1, 1, 1)
+InputControlIconButton/styles/hover = SubResource("StyleBoxFlat_1s8fq")
+InputControlIconButton/styles/normal = SubResource("StyleBoxEmpty_fw307")
+InputControlIconButton/styles/pressed = SubResource("StyleBoxFlat_ndp5i")
 LineEdit/styles/focus = ExtResource("2_wkuf1")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
