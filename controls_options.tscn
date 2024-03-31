@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cntd5yssxjyv2"]
+
+[ext_resource type="Script" path="res://controls_options.gd" id="1_pkoba"]
+[ext_resource type="PackedScene" uid="uid://d3prvbxntv3bm" path="res://control_option.tscn" id="13_fkiwe"]
+
+[node name="ControlsOptions" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pkoba")
+single_option_scene = ExtResource("13_fkiwe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Controls settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="ControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3

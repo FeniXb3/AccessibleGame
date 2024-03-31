@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3prvbxntv3bm"]
+
+[ext_resource type="Script" path="res://control_option.gd" id="1_l5n5t"]
+[ext_resource type="Texture2D" uid="uid://ckcwjdd7j78un" path="res://addons/kenney_ui_pack/PNG/blue_boxCross.png" id="2_5hghf"]
+
+[node name="ControlOption" type="HBoxContainer"]
+script = ExtResource("1_l5n5t")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "label"
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = " "
+icon = ExtResource("2_5hghf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="about_to_popup" from="PopupPanel" to="." method="_on_popup_panel_about_to_popup"]
+[connection signal="popup_hide" from="PopupPanel" to="." method="_on_popup_panel_popup_hide"]
