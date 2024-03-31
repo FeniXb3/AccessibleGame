@@ -25,8 +25,4 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="PopupPanel" type="PopupPanel" parent="."]
-
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="about_to_popup" from="PopupPanel" to="." method="_on_popup_panel_about_to_popup"]
-[connection signal="popup_hide" from="PopupPanel" to="." method="_on_popup_panel_popup_hide"]

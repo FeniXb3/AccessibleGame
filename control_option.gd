@@ -6,7 +6,6 @@ class_name ControlOption
 @export var variable : ColorVariable
 
 @onready var label = %Label
-@onready var popup_panel = $PopupPanel
 @onready var button = %Button
 
 var consume_input : bool
@@ -27,12 +26,21 @@ func _input(event):
 	if not consume_input:
 		return
 
+	if event is InputEventJoypadMotion and absf(event.axis_value) < InputMap.action_get_deadzone(action):
+		return
+
+	print(event)
+	print(Input.get_joy_info(event.device))
 	get_viewport().set_input_as_handled()
 	consume_input = false
 
 	if event.is_action_pressed("ui_cancel"):
 		return
+
 	
 	InputMap.action_erase_event(action, events[0])
 	InputMap.action_add_event(action, event)
 	button.text = event.as_text()
+
+func focus_button():
+	button.grab_focus()
