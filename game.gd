@@ -2,6 +2,7 @@ extends Node2D
 
 @export var subtitles_theme : Theme
 @export var font_size : IntVariable
+@export var background_opacity : IntVariable
 @export var background_color : ColorVariable
 @export var font_color : ColorVariable
 @export var outline_color : ColorVariable
@@ -13,6 +14,7 @@ extends Node2D
 func _ready():
 	_setup_subtitles_settings()
 	font_size.value_changed.connect(_on_font_size_value_changed)
+	background_opacity.value_changed.connect(_on_background_opacity_value_changed)
 	background_color.value_changed.connect(_on_background_color_value_changed)
 	font_color.value_changed.connect(_on_font_color_value_changed)
 	outline_color.value_changed.connect(_on_outline_color_value_changed)
@@ -23,6 +25,8 @@ func _ready():
 
 func _setup_subtitles_settings() -> void:
 	font_size.value = subtitles_theme.default_font_size
+	background_opacity.value = subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color.a * 255
+	
 	background_color.value = subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color
 	font_color.value = subtitles_theme.get_color("default_color", "RichTextLabel")
 	outline_color.value = subtitles_theme.get_color("font_outline_color", "RichTextLabel")
@@ -34,6 +38,9 @@ func _setup_subtitles_settings() -> void:
 func _on_font_size_value_changed(new_value : int) -> void:
 	subtitles_theme.default_font_size = new_value
 
+func _on_background_opacity_value_changed(new_value : int) -> void:
+	subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color.a = new_value / 255.0
+	
 func _on_background_color_value_changed(new_value : Color) -> void:
 	subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color = new_value
 
