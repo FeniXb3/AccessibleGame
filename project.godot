@@ -21,7 +21,7 @@ Captions="*res://captions.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/subtitles/plugin.cfg")
+enabled=PackedStringArray("res://addons/awesome_input_icons/plugin.cfg", "res://addons/subtitles/plugin.cfg")
 
 [gui]
 

@@ -10,12 +10,10 @@ class_name ControlOption
 
 var consume_input : bool
 
-
-
 func _ready():
 	label.text = action
-	button.text = events[0].as_text()
-	button.icon = null
+	button.text = " "
+	button.icon = InputIcon.get_icon(action)
 
 func _on_button_pressed():
 	button.icon = null
@@ -28,6 +26,9 @@ func _input(event):
 
 	if event is InputEventJoypadMotion and absf(event.axis_value) < InputMap.action_get_deadzone(action):
 		return
+		
+	if event is InputEventMouseMotion:
+		return
 
 	print(event)
 	print(Input.get_joy_info(event.device))
@@ -35,12 +36,15 @@ func _input(event):
 	consume_input = false
 
 	if event.is_action_pressed("ui_cancel"):
+		button.text = " "
+		button.icon = InputIcon.get_icon(action)
 		return
-
 	
-	InputMap.action_erase_event(action, events[0])
+	#InputMap.action_erase_event(action, events[0])
+	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
-	button.text = event.as_text()
-
+	button.text = " "
+	button.icon = InputIcon.get_icon_by_event(event)
+	
 func focus_button():
 	button.grab_focus()
