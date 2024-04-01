@@ -30,8 +30,6 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		return
 
-	print(event)
-	print(Input.get_joy_info(event.device))
 	get_viewport().set_input_as_handled()
 	consume_input = false
 
@@ -40,6 +38,7 @@ func _input(event):
 		button.icon = InputIcon.get_icon(action)
 		return
 	
+	# TODO fix erasing single event
 	#InputMap.action_erase_event(action, events[0])
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
