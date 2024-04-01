@@ -315,7 +315,7 @@ func get_key_icon(keycode: int, type: KeyIcon.InputTypes) -> KeyIcon:
 
 func get_key_icon_by_axis(axis: int, axis_value: float):
 	for key_icon in joy_axis:
-		if key_icon.keycode == axis and key_icon.axis_value == signf(axis_value):
+		if key_icon.keycode == axis and is_equal_approx(key_icon.axis_value, signf(axis_value)):
 			return key_icon
 	return null
 
