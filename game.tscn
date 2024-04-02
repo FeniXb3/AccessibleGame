@@ -22,6 +22,7 @@
 size = Vector2(128, 128)
 
 [node name="Game" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_w8ym6")
 subtitles_theme = ExtResource("2_h11us")
 font_size = ExtResource("3_wlx3m")
@@ -35,36 +36,69 @@ internal_margin = ExtResource("9_q7snq")
 corners_radius = ExtResource("10_erbub")
 
 [node name="SubtitlesLayer" parent="." instance=ExtResource("2_4d5ye")]
+process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 2
 
-[node name="SubtitleTester" parent="CanvasLayer" instance=ExtResource("3_6k828")]
+[node name="OptionsContainer" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -267.0
+offset_right = 275.0
+offset_bottom = 267.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/OptionsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/OptionsContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Options"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/OptionsContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+current_tab = 1
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+
+[node name="SubtitleTester" parent="CanvasLayer/OptionsContainer/VBoxContainer/TabContainer" instance=ExtResource("3_6k828")]
+visible = false
+layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="SubtitlesOptions" parent="CanvasLayer" instance=ExtResource("4_yqtv3")]
-offset_right = 349.0
-offset_bottom = 418.0
+[node name="SubtitlesOptions" parent="CanvasLayer/OptionsContainer/VBoxContainer/TabContainer" instance=ExtResource("4_yqtv3")]
+layout_mode = 2
 
-[node name="ControlsOptions" parent="CanvasLayer" instance=ExtResource("15_l5c8w")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -338.0
-offset_right = 0.0
-offset_bottom = 278.0
-grow_horizontal = 0
+[node name="ControlsOptions" parent="CanvasLayer/OptionsContainer/VBoxContainer/TabContainer" instance=ExtResource("15_l5c8w")]
+visible = false
+layout_mode = 2
 
-[node name="Player" parent="." instance=ExtResource("16_pxhnk")]
+[node name="Gameplay" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Player" parent="Gameplay" instance=ExtResource("16_pxhnk")]
 position = Vector2(593, 323)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="Gameplay"]
 position = Vector2(638, 503)
 scale = Vector2(5, 0.5)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Gameplay/StaticBody2D"]
 modulate = Color(0, 0.54902, 0.54902, 1)
 texture = ExtResource("17_dbrjb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/StaticBody2D"]
 shape = SubResource("RectangleShape2D_r05em")

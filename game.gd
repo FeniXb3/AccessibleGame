@@ -11,7 +11,12 @@ extends Node2D
 @export var internal_margin : IntVariable
 @export var corners_radius : IntVariable
 
+@onready var options_container = %OptionsContainer
+@onready var tab_container = %TabContainer
+
+
 func _ready():
+	options_container.hide()
 	_setup_subtitles_settings()
 	font_size.value_changed.connect(_on_font_size_value_changed)
 	background_opacity.value_changed.connect(_on_background_opacity_value_changed)
@@ -22,6 +27,14 @@ func _ready():
 	external_margin.value_changed.connect(_on_external_margin_value_changed)
 	internal_margin.value_changed.connect(_on_internal_margin_value_changed)
 	corners_radius.value_changed.connect(_on_corners_radius_value_changed)
+
+func _input(event : InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		options_container.visible = not options_container.visible
+		if options_container.visible:
+			tab_container.get_tab_bar().grab_focus()
+			tab_container.grab_focus()
+		get_tree().paused = options_container.visible
 
 func _setup_subtitles_settings() -> void:
 	font_size.value = subtitles_theme.default_font_size
