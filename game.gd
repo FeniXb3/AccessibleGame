@@ -28,12 +28,11 @@ func _ready():
 	internal_margin.value_changed.connect(_on_internal_margin_value_changed)
 	corners_radius.value_changed.connect(_on_corners_radius_value_changed)
 
-func _input(event : InputEvent) -> void:
+func _input(_event : InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		options_container.visible = not options_container.visible
 		if options_container.visible:
 			tab_container.get_tab_bar().grab_focus()
-			tab_container.grab_focus()
 		get_tree().paused = options_container.visible
 
 func _setup_subtitles_settings() -> void:

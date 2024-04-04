@@ -77,7 +77,7 @@ func _generate_animation_WORDS(data : Dictionary, caption_fields : Array[Diction
 	animation.length = duration
 	
 	if "AnimationPlayer" in data and "Name" in data:
-		data["AnimationPlayer"].get_animation_library("").add_animation(data["Name"], animation)
+		data["AnimationPlayer"].get_animation_library(data["LibraryName"]).add_animation(data["Name"], animation)
 
 	return animation
 
@@ -101,7 +101,7 @@ func _generate_animation_LETTERS(data : Dictionary, caption_fields) -> Animation
 	animation.length = duration
 	
 	if "AnimationPlayer" in data and "Name" in data:
-		data["AnimationPlayer"].get_animation_library("").add_animation(data["Name"], animation)
+		data["AnimationPlayer"].get_animation_library(data["LibraryName"]).add_animation(data["Name"], animation)
 
 	return animation
 	
@@ -110,7 +110,7 @@ func _generate_animation_subtitles(data : Dictionary, caption_fields) -> Animati
 	var track_index := _prepare_track(animation, data["Label"], Animation.UPDATE_DISCRETE)
 	var has_container := data.has("Container")
 	var container_track_index := -1 if not has_container else _prepare_track(animation, data["Container"], Animation.UPDATE_DISCRETE, "visible")
-	print((data["AnimationPlayer"] as AnimationPlayer).root_node)
+	
 	for caption in caption_fields:
 		var text : String = caption["text"]
 		var start : float = caption["start"]
@@ -127,13 +127,14 @@ func _generate_animation_subtitles(data : Dictionary, caption_fields) -> Animati
 	animation.length = duration
 	
 	if "AnimationPlayer" in data and "Name" in data: # Adds the named animation to the provded animation player.
-		data["AnimationPlayer"].get_animation_library("").add_animation(data["Name"], animation)
+		data["AnimationPlayer"].get_animation_library(data["LibraryName"]).add_animation(data["Name"], animation)
 	
 	return animation
 
 func _prepare_track(animation : Animation, node, update_mode : Animation.UpdateMode, property = "text") -> int:
 	var track_index := animation.add_track(Animation.TYPE_VALUE)
 	var nodePath := NodePath(node.owner.get_path_to(node))
+	
 	animation.value_track_set_update_mode(track_index, update_mode)
 	animation.track_set_path(track_index, "%s:%s" % [nodePath.get_concatenated_names(), property])
 	

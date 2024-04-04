@@ -35,8 +35,10 @@ external_margin = ExtResource("8_gjit3")
 internal_margin = ExtResource("9_q7snq")
 corners_radius = ExtResource("10_erbub")
 
-[node name="SubtitlesLayer" parent="." instance=ExtResource("2_4d5ye")]
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 process_mode = 1
+
+[node name="SubtitlesContainer" parent="CanvasLayer2" instance=ExtResource("2_4d5ye")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
