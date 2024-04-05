@@ -2,6 +2,7 @@ extends Button
 class_name ActionRemapButton
 
 enum RemapEventType {
+	ANY,
 	KEYBOARD,
 	MOUSE,
 	JOY
@@ -10,16 +11,19 @@ enum RemapEventType {
 @export var action : String
 @export var remap_event_type: RemapEventType
 @export var events : Array[InputEvent]
+@export var index_of_type := 0
 
 var consume_input : bool
 var event_index : int
 
-func setup(action_to_remap : String, current_events : Array[InputEvent]):
+func setup(action_to_remap : String, current_events : Array[InputEvent], remap_type: RemapEventType, index: int = 0):
 	action = action_to_remap
 	events = current_events
+	remap_event_type = remap_type
+	index_of_type = index
 	var filtered = events.filter(_filter_events_by_type)
-	if filtered:
-		event_index = events.find(filtered.front())
+	if filtered.size() > index_of_type:
+		event_index = events.find(filtered[index_of_type])
 		icon = InputIcon.get_icon(action, event_index)
 	else:
 		event_index = -1
