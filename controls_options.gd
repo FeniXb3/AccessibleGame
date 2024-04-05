@@ -7,7 +7,6 @@ extends PanelContainer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var all_actions := InputMap.get_actions()
-	var node_to_focus : Control = null
 	for action in all_actions:
 		if not action.begins_with("ui_"):
 			var events := InputMap.action_get_events(action)
@@ -18,7 +17,5 @@ func _ready():
 			var new_control_option := single_option_scene.instantiate() as ControlOption
 			new_control_option.action = action
 			new_control_option.events = events
-			
 			controls_parent.add_child(new_control_option)
-			if not node_to_focus:
-				node_to_focus = new_control_option
+			controls_parent.add_child(HSeparator.new())

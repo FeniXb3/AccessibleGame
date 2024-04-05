@@ -1,9 +1,10 @@
-extends HBoxContainer
+extends VBoxContainer
 class_name ControlOption
 
 @export var action : String
 @export var remap_type_filter : ActionRemapButton.RemapEventType
 @export var action_remap_button_scene : PackedScene
+@export var remapping_row_scene : PackedScene
 
 @onready var label = %Label
 @onready var action_events_container = %ActionEventsContainer
@@ -20,11 +21,25 @@ func _ready():
 		_add_button_with_event(e)
 
 func _add_button_with_event(event: InputEvent):
-	var new_action_remap_button : ActionRemapButton = action_remap_button_scene.instantiate()
-	new_action_remap_button.setup(action, remap_type_filter, event)
-	action_events_container.add_child(new_action_remap_button)
+	#var new_action_remap_button : ActionRemapButton = action_remap_button_scene.instantiate()
+	#new_action_remap_button.setup(action, remap_type_filter, event)
+	#action_events_container.add_child(new_action_remap_button)
+	#
+	_add_row(event)
+	
+func _add_row(event : InputEvent) -> RemappingRow:
+	var new_row : RemappingRow = remapping_row_scene.instantiate()
+	new_row.setup(action, remap_type_filter, event)
+	new_row.get_child(1).empty_remap_canceled.connect(_on_empty_remap_canceled)
+	new_row.remove_button_pressed.connect(_on_remove_button_pressed)
+	action_events_container.add_child(new_row)
+	return new_row
 	
 func _on_add_action_event_pressed():
+	var new_row := _add_row(null)
+	new_row.invoke_remapping()
+	
+func _on_add_action_event_pressed2():
 	var new_action_remap_button : ActionRemapButton = action_remap_button_scene.instantiate()
 	new_action_remap_button.setup(action, remap_type_filter, null)
 	new_action_remap_button.empty_remap_canceled.connect(_on_empty_remap_canceled)
@@ -32,11 +47,17 @@ func _on_add_action_event_pressed():
 	new_action_remap_button.grab_focus()
 	new_action_remap_button.pressed.emit()
 
+func _on_remove_button_pressed (row):
+	remove_row(row)
+	
+	
 func _on_empty_remap_canceled (button_source):
-	action_events_container.remove_child(button_source)
-	button_source.queue_free()
-	add_action_event.grab_focus()
+	remove_row(button_source)
 
+func remove_row (row):
+	action_events_container.remove_child(row)
+	row.queue_free()
+	add_action_event.grab_focus()
 
 func _filter_events_by_type(e: InputEvent):
 	match remap_type_filter:
