@@ -5,22 +5,21 @@
 
 [node name="SubtitleTester" type="Control"]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 0
 script = ExtResource("2_wy01i")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -170.0
-offset_right = 170.0
-offset_bottom = 240.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 
@@ -34,7 +33,6 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 placeholder_text = "SRT text/path"
 
 [node name="AnimationName" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -82,6 +80,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="SubtitlesContainer" parent="PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_7ueu8")]
 layout_mode = 2
+size_flags_vertical = 8
 animate_when_paused = true
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/PrepareExample" to="." method="_on_prepare_example_pressed"]

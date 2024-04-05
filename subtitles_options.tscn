@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dg0sj2af7ufac"]
+[gd_scene load_steps=14 format=3 uid="uid://dg0sj2af7ufac"]
 
 [ext_resource type="Script" path="res://subtitles_options.gd" id="1_2agnd"]
 [ext_resource type="PackedScene" uid="uid://cjtl0cm3jtjev" path="res://color_option.tscn" id="2_0co88"]
@@ -12,28 +12,35 @@
 [ext_resource type="Resource" uid="uid://bh5x1rpfhp5hk" path="res://variable_resources/internal_margin.tres" id="9_7wxty"]
 [ext_resource type="Resource" uid="uid://cbphqr0cs3f2e" path="res://variable_resources/external_margin.tres" id="10_fbsy6"]
 [ext_resource type="Resource" uid="uid://rjxbhcam7ei1" path="res://variable_resources/corners_radius.tres" id="11_n54at"]
+[ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://subtitles_layer.tscn" id="13_b6ttw"]
 
 [node name="SubtitlesOptions" type="PanelContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_2agnd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "Subtitles settings"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="FontSize" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="FontSize" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Font size"
 variable = ExtResource("7_l5ygp")
@@ -41,47 +48,58 @@ min_value = 30
 max_value = 80
 step = 5
 
-[node name="FontColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+[node name="FontColor" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_0co88")]
 layout_mode = 2
 color_label_text = "Font color"
 color_variable = ExtResource("3_fr7fj")
 
-[node name="OutlineSize" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="OutlineSize" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Outline size"
 variable = ExtResource("7_nxeqw")
 max_value = 10
 
-[node name="OutlineColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+[node name="OutlineColor" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_0co88")]
 layout_mode = 2
 color_label_text = "Outline color"
 color_variable = ExtResource("4_wjlck")
 
-[node name="BackgroundOpacity" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="BackgroundOpacity" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Background opacity"
 variable = ExtResource("8_u3ox4")
 max_value = 255
 
-[node name="BackgroundColor" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_0co88")]
+[node name="BackgroundColor" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_0co88")]
 layout_mode = 2
 color_label_text = "Background color"
 color_variable = ExtResource("3_bleap")
 
-[node name="InternalMargin" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="InternalMargin" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Internal margin"
 variable = ExtResource("9_7wxty")
 max_value = 30
 
-[node name="ExternalMargin" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="ExternalMargin" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "External margin"
 variable = ExtResource("10_fbsy6")
 max_value = 300
 
-[node name="CornersRadius" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
+[node name="CornersRadius" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("6_jeppa")]
 layout_mode = 2
 label_text = "Corners radius"
 variable = ExtResource("11_n54at")
 max_value = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="SubtitlesContainer" parent="MarginContainer/HBoxContainer/ScrollContainer" instance=ExtResource("13_b6ttw")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
