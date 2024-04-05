@@ -22,4 +22,3 @@ func _ready():
 			controls_parent.add_child(new_control_option)
 			if not node_to_focus:
 				node_to_focus = new_control_option
-				new_control_option.focus_button()

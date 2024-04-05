@@ -5,7 +5,6 @@
 
 [node name="ControlOption" type="HBoxContainer"]
 script = ExtResource("1_l5n5t")
-remap_type_filter = 1
 action_remap_button_scene = ExtResource("3_4lnhp")
 
 [node name="Label" type="Label" parent="."]
@@ -21,26 +20,9 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="KeyboardActionRemapButton" parent="ActionEventsContainer" instance=ExtResource("3_4lnhp")]
-unique_name_in_owner = true
-layout_mode = 2
-remap_event_type = 1
-
 [node name="AddActionEvent" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add"
-
-[node name="MouseActionRemapButton" parent="." instance=ExtResource("3_4lnhp")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-remap_event_type = 2
-
-[node name="JoyActionRemapButton" parent="." instance=ExtResource("3_4lnhp")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-remap_event_type = 3
 
 [connection signal="pressed" from="AddActionEvent" to="." method="_on_add_action_event_pressed"]

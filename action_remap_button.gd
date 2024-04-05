@@ -1,6 +1,8 @@
 extends Button
 class_name ActionRemapButton
 
+signal empty_remap_canceled(button_source)
+
 enum RemapEventType {
 	ANY,
 	KEYBOARD,
@@ -10,34 +12,17 @@ enum RemapEventType {
 
 @export var action : String
 @export var remap_event_type: RemapEventType
-@export var events : Array[InputEvent]
-@export var index_of_type := 0
+@export var action_event : InputEvent
 
 var consume_input : bool
-var event_index : int
 
-func setup(action_to_remap : String, current_events : Array[InputEvent], remap_type: RemapEventType, index: int = 0):
+func setup(action_to_remap : String, remap_type: RemapEventType, current_event : InputEvent):
 	action = action_to_remap
-	events = current_events
+	action_event = current_event
 	remap_event_type = remap_type
-	index_of_type = index
-	var filtered = events.filter(_filter_events_by_type)
-	if filtered.size() > index_of_type:
-		event_index = events.find(filtered[index_of_type])
-		icon = InputIcon.get_icon(action, event_index)
-	else:
-		event_index = -1
 
-func _filter_events_by_type(e: InputEvent):
-	var x := typeof(e)
-	print("Typeof: %s" % x)
-	match remap_event_type:
-		RemapEventType.KEYBOARD:
-			return e is InputEventKey
-		RemapEventType.MOUSE:
-			return e is InputEventMouse
-		RemapEventType.JOY:
-			return e is InputEventJoypadButton or e is InputEventJoypadMotion
+	var event_index := InputMap.action_get_events(action).find(current_event)
+	icon = InputIcon.get_icon(action, event_index)
 
 func _input(event):
 	if not consume_input:
@@ -52,36 +37,33 @@ func _input(event):
 	get_viewport().set_input_as_handled()
 
 	if event.is_action_pressed("ui_cancel"):
-		text = " "
-		icon = InputIcon.get_icon(action, event_index)
-		consume_input = false	
+		if action_event != null:
+			text = " "
+			icon = InputIcon.get_icon_by_event(action_event)
+			consume_input = false
+		else:
+			empty_remap_canceled.emit(self)
 		return
-	
-	if event is InputEventKey and remap_event_type != RemapEventType.KEYBOARD:
-		return
-		
-	if event is InputEventMouse and remap_event_type != RemapEventType.MOUSE:
-		return
-		
-	if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and remap_event_type != RemapEventType.JOY:
-		return
+
+	if remap_event_type != RemapEventType.ANY:
+		if event is InputEventKey and remap_event_type != RemapEventType.KEYBOARD:
+			return
+			
+		if event is InputEventMouse and remap_event_type != RemapEventType.MOUSE:
+			return
+			
+		if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and remap_event_type != RemapEventType.JOY:
+			return
 	
 	consume_input = false
-	
-	if event_index < 0:
-		event_index = events.size()
-		events.append(event)
-		InputMap.action_add_event(action, event)
-	else:
-		events[event_index] = event
-		InputMap.action_erase_events(action)
-		for e in events:
-			InputMap.action_add_event(action, e)
-		
+	var event_index = InputMap.action_get_events(action).find(event)
+	if event_index >= 0:
+		InputMap.action_erase_event(action, action_event)
+
+	InputMap.action_add_event(action, event)
+
 	text = " "
-	icon = InputIcon.get_icon(action, event_index)
-	
-	#icon = InputIcon.get_icon_by_event(event)
+	icon = InputIcon.get_icon_by_event(event)
 
 func _on_pressed():
 	icon = null
