@@ -4,6 +4,7 @@ extends MarginContainer
 #@onready var external_margin_container = %ExternalMarginContainer
 @export var subtitles_theme : Theme
 @export var speech_player : AudioStreamPlayer
+@export var animate_when_paused := false
 @onready var panel_container = %PanelContainer
 
 var library_name := "local"
@@ -52,8 +53,9 @@ func _on_subtitle_creation_requested(text_path: String, animation_name : String)
 	Captions.generate_animation(data)
 
 func _on_subtitle_play_requested(animation_name: String):
-	if process_mode == PROCESS_MODE_PAUSABLE and get_tree().paused:
+	if not (animate_when_paused and get_tree().paused):
 		return
+
 	assert(animation_name, "Subtitle animation name is required to play it")
 	print(animation_player.get_animation_list())
 	animation_player.play("%s/%s" % [library_name, animation_name])
