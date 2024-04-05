@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3prvbxntv3bm"]
 
 [ext_resource type="Script" path="res://control_option.gd" id="1_l5n5t"]
-[ext_resource type="Texture2D" uid="uid://ckcwjdd7j78un" path="res://addons/kenney_ui_pack/PNG/blue_boxCross.png" id="2_5hghf"]
+[ext_resource type="PackedScene" uid="uid://cxgwpxo5yy2gv" path="res://action_remap_button.tscn" id="3_4lnhp"]
 
 [node name="ControlOption" type="HBoxContainer"]
 script = ExtResource("1_l5n5t")
@@ -15,14 +15,16 @@ text = "label"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="."]
+[node name="KeyboardActionRemapButton" parent="." instance=ExtResource("3_4lnhp")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
-theme_type_variation = &"InputControlIconButton"
-text = " "
-icon = ExtResource("2_5hghf")
-icon_alignment = 1
-expand_icon = true
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="MouseActionRemapButton" parent="." instance=ExtResource("3_4lnhp")]
+unique_name_in_owner = true
+layout_mode = 2
+remap_event_type = 1
+
+[node name="JoyActionRemapButton" parent="." instance=ExtResource("3_4lnhp")]
+unique_name_in_owner = true
+layout_mode = 2
+remap_event_type = 2
