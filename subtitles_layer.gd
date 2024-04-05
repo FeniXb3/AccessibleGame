@@ -53,7 +53,7 @@ func _on_subtitle_creation_requested(text_path: String, animation_name : String)
 	Captions.generate_animation(data)
 
 func _on_subtitle_play_requested(animation_name: String):
-	if not (animate_when_paused and get_tree().paused):
+	if animate_when_paused != get_tree().paused or not is_visible_in_tree():
 		return
 
 	assert(animation_name, "Subtitle animation name is required to play it")
