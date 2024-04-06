@@ -14,14 +14,11 @@ size_flags_horizontal = 3
 
 [node name="ActionRemapButton" parent="." instance=ExtResource("1_tsfo1")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="RemoveActionEvent" type="Button" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-size_flags_horizontal = 3
 text = "Remove"
 
 [connection signal="pressed" from="RemoveActionEvent" to="." method="_on_remove_action_event_pressed"]
