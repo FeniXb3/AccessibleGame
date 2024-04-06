@@ -2,10 +2,19 @@ extends PanelContainer
 
 @export var single_option_scene : PackedScene
 
-@onready var controls_parent = %ControlsParent
+#@onready var controls_parent = %ControlsParent
+@onready var keyboard_controls_parent = %KeyboardControlsParent
+@onready var mouse_controls_parent = %MouseControlsParent
+@onready var joy_controls_parent = %JoyControlsParent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var controls_parents = {
+		ActionRemapButton.RemapEventType.KEYBOARD: keyboard_controls_parent,
+		ActionRemapButton.RemapEventType.MOUSE: mouse_controls_parent,
+		ActionRemapButton.RemapEventType.JOY: joy_controls_parent
+	}
+	
 	var all_actions := InputMap.get_actions()
 	for action in all_actions:
 		if not action.begins_with("ui_"):
@@ -14,8 +23,10 @@ func _ready():
 			if events.is_empty():
 				continue
 				
-			var new_control_option := single_option_scene.instantiate() as ControlOption
-			new_control_option.action = action
-			new_control_option.events = events
-			controls_parent.add_child(new_control_option)
-			controls_parent.add_child(HSeparator.new())
+			for remap_filter in controls_parents:
+				var new_control_option := single_option_scene.instantiate() as ControlOption
+				new_control_option.action = action
+				new_control_option.events = events
+				new_control_option.remap_type_filter = remap_filter
+				controls_parents[remap_filter].add_child(new_control_option)
+				controls_parents[remap_filter].add_child(HSeparator.new())

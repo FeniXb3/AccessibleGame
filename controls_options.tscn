@@ -27,12 +27,36 @@ layout_mode = 2
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+[node name="Keyboard" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 follow_focus = true
 
-[node name="ControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ScrollContainer"]
+[node name="KeyboardControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Keyboard"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Mouse" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+follow_focus = true
+
+[node name="MouseControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Mouse"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controller" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+follow_focus = true
+
+[node name="JoyControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controller"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
