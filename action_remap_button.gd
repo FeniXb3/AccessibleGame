@@ -60,10 +60,11 @@ func _input(event):
 	if event_index >= 0:
 		InputMap.action_erase_event(action, action_event)
 
-	InputMap.action_add_event(action, event)
+	action_event = event
+	InputMap.action_add_event(action, action_event)
 
 	text = " "
-	icon = InputIcon.get_icon_by_event(event)
+	icon = InputIcon.get_icon_by_event(action_event)
 
 func _on_pressed():
 	icon = null
