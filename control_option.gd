@@ -52,7 +52,7 @@ func _on_remove_button_pressed (row):
 	
 	
 func _on_empty_remap_canceled (button_source):
-	remove_row(button_source)
+	remove_row(button_source.get_parent())
 
 func remove_row (row):
 	action_events_container.remove_child(row)
