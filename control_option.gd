@@ -9,6 +9,7 @@ class_name ControlOption
 @onready var label = %Label
 @onready var action_events_container = %ActionEventsContainer
 @onready var add_action_event = %AddActionEvent
+@onready var is_toggle_check = %IsToggleCheck
 
 var consume_input : bool
 var events : Array[InputEvent]
@@ -16,7 +17,7 @@ var events : Array[InputEvent]
 func _ready():
 	label.text = action
 	events = InputMap.action_get_events(action).filter(_filter_events_by_type)
-	
+	is_toggle_check.button_pressed = InputEnhancer.get_togglable(action)
 	for e in events:
 		_add_button_with_event(e)
 
@@ -69,3 +70,7 @@ func _filter_events_by_type(e: InputEvent):
 			return e is InputEventJoypadButton or e is InputEventJoypadMotion
 		ActionRemapButton.RemapEventType.ANY:
 			return true
+
+
+func _on_is_toggle_check_toggled(toggled_on):
+	InputEnhancer.set_togglable(action, toggled_on)

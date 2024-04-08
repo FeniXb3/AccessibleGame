@@ -6,6 +6,8 @@
 
 [node name="ControlOption" type="VBoxContainer"]
 script = ExtResource("1_l5n5t")
+action = null
+remap_type_filter = null
 action_remap_button_scene = ExtResource("3_4lnhp")
 remapping_row_scene = ExtResource("2_wfu7c")
 
@@ -22,6 +24,11 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="IsToggleCheck" type="CheckButton" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Is toggle"
+
 [node name="ActionEventsContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
@@ -32,4 +39,5 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Add"
 
+[connection signal="toggled" from="HBoxContainer/IsToggleCheck" to="." method="_on_is_toggle_check_toggled"]
 [connection signal="pressed" from="AddActionEvent" to="." method="_on_add_action_event_pressed"]
