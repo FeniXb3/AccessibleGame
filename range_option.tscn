@@ -20,4 +20,15 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 ticks_on_borders = true
 
+[node name="Spacer2" type="Control" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
 [connection signal="value_changed" from="RangeSlider" to="." method="_on_range_slider_value_changed"]

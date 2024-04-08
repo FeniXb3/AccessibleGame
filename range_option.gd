@@ -8,6 +8,7 @@ extends HBoxContainer
 
 @onready var label = %Label
 @onready var range_slider = %RangeSlider
+@onready var value_label = %ValueLabel
 
 func _ready():
 	label.text = label_text
@@ -15,9 +16,14 @@ func _ready():
 	range_slider.min_value = min_value
 	range_slider.max_value = max_value
 	range_slider.step = step
+	value_label.text = "%d" % range_slider.value
+	
 
 func _on_value_changed(new_value : int) -> void:
 	range_slider.value = new_value
+	value_label.text = "%d" % new_value
+	
 
 func _on_range_slider_value_changed(value : int) -> void:
 	variable.value = value
+	value_label.text = "%d" % value
