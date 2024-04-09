@@ -21,16 +21,16 @@ func setup(action_to_remap : String, remap_type: RemapEventType, current_event :
 	action_event = current_event
 	remap_event_type = remap_type
 
-	var event_index := InputMap.action_get_events(action).find(current_event)
-	icon = InputIcon.get_icon(action, event_index)
+	if action_event:
+		icon = InputIcon.get_icon_by_event(action_event)
 
 func _input(event):
 	if not consume_input:
 		return
 
-	if event is InputEventJoypadMotion and absf(event.axis_value) < InputMap.action_get_deadzone(action):
+	if InputEnhancer.is_joy_motion_in_deadzone(action, event):
 		return
-		
+
 	if event is InputEventMouseMotion:
 		return
 
@@ -48,20 +48,17 @@ func _input(event):
 	if remap_event_type != RemapEventType.ANY:
 		if event is InputEventKey and remap_event_type != RemapEventType.KEYBOARD:
 			return
-			
+
 		if event is InputEventMouse and remap_event_type != RemapEventType.MOUSE:
 			return
-			
+
 		if (event is InputEventJoypadButton or event is InputEventJoypadMotion) and remap_event_type != RemapEventType.JOY:
 			return
-	
-	consume_input = false
-	var event_index = InputMap.action_get_events(action).find(event)
-	if event_index >= 0:
-		InputMap.action_erase_event(action, action_event)
 
+	consume_input = false
+
+	InputEnhancer.replace_event(action, action_event, event)
 	action_event = event
-	InputMap.action_add_event(action, action_event)
 
 	text = " "
 	icon = InputIcon.get_icon_by_event(action_event)

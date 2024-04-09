@@ -14,19 +14,20 @@ func _ready():
 		ActionRemapButton.RemapEventType.MOUSE: mouse_controls_parent,
 		ActionRemapButton.RemapEventType.JOY: joy_controls_parent
 	}
-	
+
 	var all_actions := InputMap.get_actions()
 	for action in all_actions:
-		if not action.begins_with("ui_"):
-			var events := InputMap.action_get_events(action)
-			print("{action} : {events}".format({"action":action, "events":events}))
-			if events.is_empty():
-				continue
-				
-			for remap_filter in controls_parents:
-				var new_control_option := single_option_scene.instantiate() as ControlOption
-				new_control_option.action = action
-				new_control_option.events = events
-				new_control_option.remap_type_filter = remap_filter
-				controls_parents[remap_filter].add_child(new_control_option)
-				controls_parents[remap_filter].add_child(HSeparator.new())
+		if action.begins_with("ui_"):
+			continue
+
+		var events := InputMap.action_get_events(action)
+		if events.is_empty():
+			continue
+
+		for remap_filter in controls_parents:
+			var new_control_option := single_option_scene.instantiate() as ControlOption
+			new_control_option.action = action
+			new_control_option.events = events
+			new_control_option.remap_type_filter = remap_filter
+			controls_parents[remap_filter].add_child(new_control_option)
+			controls_parents[remap_filter].add_child(HSeparator.new())

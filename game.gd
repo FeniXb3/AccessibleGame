@@ -16,6 +16,8 @@ extends Node2D
 
 
 func _ready():
+	#InputEnhancer.save_current_scheme()
+	InputEnhancer.load_input_scheme()
 	options_container.hide()
 	_setup_subtitles_settings()
 	font_size.value_changed.connect(_on_font_size_value_changed)
@@ -38,7 +40,7 @@ func _input(_event : InputEvent) -> void:
 func _setup_subtitles_settings() -> void:
 	font_size.value = subtitles_theme.default_font_size
 	background_opacity.value = subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color.a * 255
-	
+
 	background_color.value = subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color
 	font_color.value = subtitles_theme.get_color("default_color", "RichTextLabel")
 	outline_color.value = subtitles_theme.get_color("font_outline_color", "RichTextLabel")
@@ -52,7 +54,7 @@ func _on_font_size_value_changed(new_value : int) -> void:
 
 func _on_background_opacity_value_changed(new_value : int) -> void:
 	subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color.a = new_value / 255.0
-	
+
 func _on_background_color_value_changed(new_value : Color) -> void:
 	subtitles_theme.get_stylebox("panel", "PanelContainer").bg_color = new_value
 
@@ -68,11 +70,11 @@ func _on_outline_size_value_changed(new_value : int) -> void:
 
 func _on_external_margin_value_changed(new_value : int) -> void:
 	_set_all_margins_to("MarginContainer", new_value)
-	
+
 
 func _on_internal_margin_value_changed(new_value : int) -> void:
 	_set_all_margins_to("InternalMarginContainer", new_value)
-	
+
 func _set_all_margins_to(container_type : String, margin_value : int) -> void:
 	subtitles_theme.set_constant("margin_bottom", container_type, margin_value)
 	subtitles_theme.set_constant("margin_top", container_type, margin_value)
