@@ -15,7 +15,6 @@ class_name ControlOption
 
 
 var consume_input : bool
-var events : Array[InputEvent]
 
 func _ready():
 	label.text = action
@@ -23,12 +22,15 @@ func _ready():
 	action_data.togglable_changed.connect(_on_action_data_togglable_changed)
 	action_data.deadzone_changed.connect(_on_action_data_deadzone_changed)
 
-	events = InputMap.action_get_events(action).filter(_filter_events_by_type)
 	is_toggle_check.button_pressed = action_data.is_togglable#InputEnhancer.get_togglable(action)
 	deadzone_spin_box.value = action_data.deadzone
+	deadzone_spin_box.hide()
 
-	for e in events:
+	for e in action_data.events.filter(_filter_events_by_type):
 		_add_button_with_event(e)
+		if e is InputEventJoypadMotion:
+			deadzone_spin_box.show()
+
 func _on_action_data_togglable_changed(new_value: bool) -> void:
 	is_toggle_check.button_pressed = new_value
 
@@ -46,6 +48,7 @@ func _add_row(event : InputEvent) -> RemappingRow:
 	var new_row : RemappingRow = remapping_row_scene.instantiate()
 	new_row.setup(action, remap_type_filter, event)
 	new_row.get_child(1).empty_remap_canceled.connect(_on_empty_remap_canceled)
+	new_row.get_child(1).remap_completed.connect(_on_remap_completed)
 	new_row.remove_button_pressed.connect(_on_remove_button_pressed)
 	action_events_container.add_child(new_row)
 	return new_row
@@ -65,9 +68,15 @@ func _on_add_action_event_pressed2():
 func _on_remove_button_pressed (row):
 	remove_row(row)
 
+	deadzone_spin_box.visible = action_data.events.any(func(e): return e is InputEventJoypadMotion)
 
-func _on_empty_remap_canceled (button_source):
+
+func _on_empty_remap_canceled(button_source):
 	remove_row(button_source.get_parent())
+
+func _on_remap_completed(_button_source, _old_event: InputEvent, _new_event: InputEvent) -> void:
+	deadzone_spin_box.visible = action_data.events.any(func(e): return e is InputEventJoypadMotion)
+
 
 func remove_row (row):
 	action_events_container.remove_child(row)

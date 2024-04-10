@@ -17,7 +17,7 @@ func _on_input_scheme_loaded():
 		ActionRemapButton.RemapEventType.MOUSE: mouse_controls_parent,
 		ActionRemapButton.RemapEventType.JOY: joy_controls_parent
 	}
-
+#todo use enhancer
 	var all_actions := InputMap.get_actions()
 	for action in all_actions:
 		if action.begins_with("ui_"):
@@ -30,7 +30,6 @@ func _on_input_scheme_loaded():
 		for remap_filter in controls_parents:
 			var new_control_option := single_option_scene.instantiate() as ControlOption
 			new_control_option.action = action
-			new_control_option.events = events
 			new_control_option.remap_type_filter = remap_filter
 			controls_parents[remap_filter].add_child(new_control_option)
 			controls_parents[remap_filter].add_child(HSeparator.new())

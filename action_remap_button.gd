@@ -2,6 +2,7 @@ extends Button
 class_name ActionRemapButton
 
 signal empty_remap_canceled(button_source)
+signal remap_completed(button_source, old_event, new_event)
 
 enum RemapEventType {
 	ANY,
@@ -58,6 +59,7 @@ func _input(event):
 	consume_input = false
 
 	InputEnhancer.replace_event(action, action_event, event)
+	remap_completed.emit(self, action_event, event)
 	action_event = event
 
 	text = " "

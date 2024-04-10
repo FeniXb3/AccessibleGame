@@ -6,8 +6,6 @@
 
 [node name="ControlOption" type="VBoxContainer"]
 script = ExtResource("1_l5n5t")
-action = null
-remap_type_filter = null
 action_remap_button_scene = ExtResource("3_4lnhp")
 remapping_row_scene = ExtResource("2_wfu7c")
 
