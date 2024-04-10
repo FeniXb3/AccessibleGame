@@ -37,7 +37,7 @@ func _input(event):
 
 	get_viewport().set_input_as_handled()
 
-	if event.is_action_pressed("ui_cancel") or event.is_action(action):
+	if event.is_action_pressed("ui_cancel") or event.is_action(action, true):
 		if action_event != null:
 			text = " "
 			icon = InputIcon.get_icon_by_event(action_event)
