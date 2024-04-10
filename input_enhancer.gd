@@ -52,11 +52,15 @@ static func action_has_mouse_wheel_event(action_name: StringName):
 static func get_togglable(action: StringName) -> bool:
 	var action_data = input_scheme.get_action_data(action)
 	return action_data.is_togglable if action_data else false
-	#return action_togglable_map.get(action, false)
 
 static func set_togglable(action: StringName, state: bool):
 	input_scheme.set_action_togglable(action, state)
 	action_toggle_state_map[action] = false
+	save_current_scheme()
+
+static func set_deadzone(action: StringName, value: float) -> void:
+	InputMap.action_set_deadzone(action, value)
+	input_scheme.set_action_deadzone(action, value)
 	save_current_scheme()
 
 static func get_action_data(action: StringName) -> InputMapActionData:
@@ -74,6 +78,7 @@ static func save_default_scheme() -> void:
 			continue
 		var action_data := InputMapActionData.new()
 		action_data.action = action
+		action_data.deadzone = InputMap.action_get_deadzone(action)
 
 		var all_events := InputMap.action_get_events(action)
 		action_data.events.append_array(all_events)
@@ -99,6 +104,7 @@ static func load_input_scheme() -> void:
 		else:
 			InputMap.add_action(action)
 
+		InputMap.action_set_deadzone(action, action_data.deadzone)
 		for event in action_data.events:
 			InputMap.action_add_event(action, event)
 

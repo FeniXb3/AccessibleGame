@@ -11,6 +11,8 @@ class_name ControlOption
 @onready var action_events_container = %ActionEventsContainer
 @onready var add_action_event = %AddActionEvent
 @onready var is_toggle_check = %IsToggleCheck
+@onready var deadzone_spin_box = %DeadzoneSpinBox
+
 
 var consume_input : bool
 var events : Array[InputEvent]
@@ -19,13 +21,19 @@ func _ready():
 	label.text = action
 	action_data = InputEnhancer.get_action_data(action)
 	action_data.togglable_changed.connect(_on_action_data_togglable_changed)
+	action_data.deadzone_changed.connect(_on_action_data_deadzone_changed)
+
 	events = InputMap.action_get_events(action).filter(_filter_events_by_type)
 	is_toggle_check.button_pressed = action_data.is_togglable#InputEnhancer.get_togglable(action)
+	deadzone_spin_box.value = action_data.deadzone
 
 	for e in events:
 		_add_button_with_event(e)
 func _on_action_data_togglable_changed(new_value: bool) -> void:
 	is_toggle_check.button_pressed = new_value
+
+func _on_action_data_deadzone_changed(new_value: float) -> void:
+	deadzone_spin_box.value = new_value
 
 func _add_button_with_event(event: InputEvent):
 	#var new_action_remap_button : ActionRemapButton = action_remap_button_scene.instantiate()
@@ -80,3 +88,7 @@ func _filter_events_by_type(e: InputEvent):
 
 func _on_is_toggle_check_toggled(toggled_on):
 	InputEnhancer.set_togglable(action, toggled_on)
+
+
+func _on_deadzone_spin_box_value_changed(value):
+	InputEnhancer.set_deadzone(action, value)

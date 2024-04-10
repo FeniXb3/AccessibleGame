@@ -1,7 +1,8 @@
 extends Resource
 class_name InputMapActionData
 
-signal togglable_changed(new_value : bool)
+signal togglable_changed(new_value: bool)
+signal deadzone_changed(new_value: float)
 
 #TODO handle deadzone getting and setting; display it only if action has joypad motion
 @export var action: StringName
@@ -10,6 +11,11 @@ signal togglable_changed(new_value : bool)
 		if not is_togglable == new_value:
 			is_togglable = new_value
 			togglable_changed.emit(is_togglable)
+@export var deadzone: float:
+	set(new_value):
+		if not deadzone == new_value:
+			deadzone = new_value
+			deadzone_changed.emit(deadzone)
 @export var events: Array[InputEvent] = []
 
 func has_event(event: InputEvent) -> bool:

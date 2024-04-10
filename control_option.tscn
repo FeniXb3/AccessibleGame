@@ -6,6 +6,8 @@
 
 [node name="ControlOption" type="VBoxContainer"]
 script = ExtResource("1_l5n5t")
+action = null
+remap_type_filter = null
 action_remap_button_scene = ExtResource("3_4lnhp")
 remapping_row_scene = ExtResource("2_wfu7c")
 
@@ -27,6 +29,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Is toggle"
 
+[node name="DeadzoneSpinBox" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
 [node name="ActionEventsContainer" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
@@ -38,4 +46,5 @@ size_flags_horizontal = 0
 text = "Add"
 
 [connection signal="toggled" from="HBoxContainer/IsToggleCheck" to="." method="_on_is_toggle_check_toggled"]
+[connection signal="value_changed" from="HBoxContainer/DeadzoneSpinBox" to="." method="_on_deadzone_spin_box_value_changed"]
 [connection signal="pressed" from="AddActionEvent" to="." method="_on_add_action_event_pressed"]

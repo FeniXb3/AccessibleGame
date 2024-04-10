@@ -16,6 +16,10 @@ func set_action_togglable(action: StringName, is_togglable: bool) -> void:
 	if action_data:
 		action_data.is_togglable = is_togglable
 
+func set_action_deadzone(action: StringName, value: float):
+	var action_data = get_action_data(action)
+	if action_data:
+		action_data.deadzone = value
 
 func add_action_event(action: StringName, event: InputEvent) -> void:
 	var action_data := get_action_data(action)
