@@ -7,8 +7,11 @@ extends PanelContainer
 @onready var mouse_controls_parent = %MouseControlsParent
 @onready var joy_controls_parent = %JoyControlsParent
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	InputEnhancer.loaded.connect(_on_input_scheme_loaded)
+
+
+func _on_input_scheme_loaded():
 	var controls_parents = {
 		ActionRemapButton.RemapEventType.KEYBOARD: keyboard_controls_parent,
 		ActionRemapButton.RemapEventType.MOUSE: mouse_controls_parent,

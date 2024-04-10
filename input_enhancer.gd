@@ -1,6 +1,6 @@
 class_name InputEnhancer
 
-
+static var loaded_signal_holder := LoadedSignalHolder.new()
 static var saved_path := "user://input_map_scheme.tres"
 static var default_path := "res://default_input_map_scheme.tres"
 
@@ -9,6 +9,10 @@ static var wheel_up: InputEventMouseButton
 static var action_togglable_map: Dictionary = {}
 static var action_toggle_state_map: Dictionary = {}
 static var input_scheme : InputMapScheme#.new()
+
+static var loaded: Signal:
+	get:
+		return loaded_signal_holder.loaded
 
 static func get_axis_or_mouse_wheel(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_value: float = 0
@@ -46,9 +50,6 @@ static func action_has_mouse_wheel_event(action_name: StringName):
 		or InputMap.action_has_event(action_name, wheel_up))
 
 static func get_togglable(action: StringName) -> bool:
-	if not input_scheme:
-		load_input_scheme()
-
 	var action_data = input_scheme.get_action_data(action)
 	return action_data.is_togglable if action_data else false
 	#return action_togglable_map.get(action, false)
@@ -59,8 +60,6 @@ static func set_togglable(action: StringName, state: bool):
 	save_current_scheme()
 
 static func get_action_data(action: StringName) -> InputMapActionData:
-	if not input_scheme:
-		load_input_scheme()
 	return input_scheme.get_action_data(action)
 
 static func save_current_scheme() -> void:
@@ -88,9 +87,11 @@ static func load_input_scheme() -> void:
 		print("saved")
 	else:
 		print("default")
+		if not FileAccess.file_exists(default_path):
+			print("create default")
+			save_default_scheme()
 		input_scheme = ResourceLoader.load(default_path, "InputMapScheme").duplicate(true)
 
-	#TODO: update InputMap
 	for action_data in input_scheme.actions:
 		var action := action_data.action
 		if InputMap.has_action(action):
@@ -101,7 +102,7 @@ static func load_input_scheme() -> void:
 		for event in action_data.events:
 			InputMap.action_add_event(action, event)
 
-
+	loaded_signal_holder.loaded.emit()
 
 static func replace_event(action: StringName, old_event: InputEvent, new_event: InputEvent):
 	if old_event:

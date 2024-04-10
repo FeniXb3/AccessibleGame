@@ -16,8 +16,8 @@ extends Node2D
 
 
 func _ready():
-	#InputEnhancer.save_current_scheme()
 	InputEnhancer.load_input_scheme()
+
 	options_container.hide()
 	_setup_subtitles_settings()
 	font_size.value_changed.connect(_on_font_size_value_changed)
