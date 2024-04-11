@@ -8,3 +8,6 @@ signal value_changed(new_value : float)
 		if not value == new_value:
 			value = new_value
 			value_changed.emit(value)
+
+func _init(starting_value: float = 0):
+	value = starting_value
