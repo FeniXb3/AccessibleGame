@@ -1,7 +1,14 @@
 extends Resource
 class_name InputMapScheme
 
+signal vibration_strength_changed(new_value: float)
+
 @export var actions: Array[InputMapActionData] = []
+@export var vibration_strength: float = 1:
+	set(new_value):
+		if not vibration_strength == new_value:
+			vibration_strength = new_value
+			vibration_strength_changed.emit(vibration_strength)
 
 func get_action_data(action: StringName) -> InputMapActionData:
 	var data = actions.filter(func(ad: InputMapActionData): return ad.action == action)

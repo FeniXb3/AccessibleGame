@@ -132,3 +132,6 @@ static func action_erase_event(action: StringName, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
 	input_scheme.remove_action_event(action, event)
 	save_current_scheme()
+
+static func start_joy_vibration(device: int, weak_magnitude: float, strong_magnitude: float, duration: float = 0) -> void:
+	Input.start_joy_vibration(device, weak_magnitude * input_scheme.vibration_strength, strong_magnitude * input_scheme.vibration_strength, duration)
