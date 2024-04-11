@@ -68,15 +68,18 @@ func _on_add_action_event_pressed2():
 func _on_remove_button_pressed (row):
 	remove_row(row)
 
-	deadzone_spin_box.visible = action_data.events.any(func(e): return e is InputEventJoypadMotion)
+	update_deadzone_control_visibility()
+
+func update_deadzone_control_visibility():
+	deadzone_spin_box.visible = remap_type_filter == ActionRemapButton.RemapEventType.JOY\
+			and action_data.events.any(func(e): return e is InputEventJoypadMotion)
 
 
 func _on_empty_remap_canceled(button_source):
 	remove_row(button_source.get_parent())
 
 func _on_remap_completed(_button_source, _old_event: InputEvent, _new_event: InputEvent) -> void:
-	deadzone_spin_box.visible = action_data.events.any(func(e): return e is InputEventJoypadMotion)
-
+	update_deadzone_control_visibility()
 
 func remove_row (row):
 	action_events_container.remove_child(row)
