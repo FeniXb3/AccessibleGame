@@ -86,6 +86,12 @@ static func save_default_scheme() -> void:
 
 	ResourceSaver.save(input_map_scheme, default_path)
 
+static func reset_input_scheme() -> void:
+	if FileAccess.file_exists(saved_path):
+		DirAccess.remove_absolute(saved_path)
+
+	load_input_scheme()
+
 static func load_input_scheme() -> void:
 	if FileAccess.file_exists(saved_path):
 		input_scheme = ResourceLoader.load(saved_path, "InputMapScheme")
