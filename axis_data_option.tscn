@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://do1mh8varxv6q"]
+
+[ext_resource type="PackedScene" uid="uid://d1ds65i3kt0qb" path="res://range_float_option.tscn" id="1_e0xt8"]
+[ext_resource type="Script" path="res://axis_data_option.gd" id="1_icjyp"]
+[ext_resource type="PackedScene" uid="uid://cihlmra6al7ce" path="res://bool_option.tscn" id="3_5x76w"]
+
+[node name="AxisDataOption" type="HBoxContainer"]
+auto_translate_mode = 1
+script = ExtResource("1_icjyp")
+
+[node name="AxisNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+text = "Axis name"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="SensitivityOption" parent="VBoxContainer" instance=ExtResource("1_e0xt8")]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+label_text = "Sensitivity"
+max_value = 4.0
+
+[node name="IsInvertedOption" parent="VBoxContainer" instance=ExtResource("3_5x76w")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Is inverted"

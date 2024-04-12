@@ -23,7 +23,12 @@ static func get_axis_or_mouse_wheel(negative_action: StringName, positive_action
 	if action_has_mouse_wheel_event(positive_action) and Input.is_action_just_pressed(positive_action):
 		axis_value += 1
 
-	return get_axis(negative_action, positive_action) + axis_value
+	var axis_data = input_scheme.get_axis_data(negative_action, positive_action)
+	var multiplier = 1 if not axis_data \
+			else axis_data.sensitivity.value \
+			* (-1 if axis_data.is_inverted.value else 1)
+
+	return multiplier * (get_axis(negative_action, positive_action) + axis_value)
 
 static func get_axis(negative_action: StringName, positive_action: StringName) -> float:
 	return get_action_strength(positive_action) - get_action_strength(negative_action)
@@ -73,6 +78,8 @@ static func save_default_scheme() -> void:
 	var all_actions := InputMap.get_actions()
 	var input_map_scheme = InputMapScheme.new()
 
+	var axes: Dictionary = {}
+
 	for action in all_actions:
 		if action.begins_with("ui_"):
 			continue
@@ -83,6 +90,30 @@ static func save_default_scheme() -> void:
 		var all_events := InputMap.action_get_events(action)
 		action_data.events.append_array(all_events)
 		input_map_scheme.actions.append(action_data)
+
+		if action.ends_with("_left"):
+			var axis_core_name := action.replace("_left", "")
+			if not axes.has(axis_core_name):
+				axes[axis_core_name] = InputAxisData.new()
+			axes[axis_core_name].negative_action = action
+		elif action.ends_with("_right"):
+			var axis_core_name := action.replace("_right", "")
+			if not axes.has(axis_core_name):
+				axes[axis_core_name] = InputAxisData.new()
+			axes[axis_core_name].positive_action = action
+		elif action.ends_with("_up"):
+			var axis_core_name := action.replace("_up", "")
+			if not axes.has(axis_core_name):
+				axes[axis_core_name] = InputAxisData.new()
+			axes[axis_core_name].negative_action = action
+		elif action.ends_with("_down"):
+			var axis_core_name := action.replace("_down", "")
+			if not axes.has(axis_core_name):
+				axes[axis_core_name] = InputAxisData.new()
+			axes[axis_core_name].positive_action = action
+
+	for axis in axes:
+		input_map_scheme.axes.append(axes[axis])
 
 	ResourceSaver.save(input_map_scheme, default_path)
 

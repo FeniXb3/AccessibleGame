@@ -32,6 +32,9 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	var rotate_direction = InputEnhancer.get_axis_or_mouse_wheel("rotate_left", "rotate_right")
+
+	rotate(deg_to_rad(rotate_direction))
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:

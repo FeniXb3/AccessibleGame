@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cntd5yssxjyv2"]
+[gd_scene load_steps=5 format=3 uid="uid://cntd5yssxjyv2"]
 
 [ext_resource type="Script" path="res://controls_options.gd" id="1_pkoba"]
 [ext_resource type="PackedScene" uid="uid://d1ds65i3kt0qb" path="res://range_float_option.tscn" id="3_8aiwu"]
+[ext_resource type="PackedScene" uid="uid://do1mh8varxv6q" path="res://axis_data_option.tscn" id="4_u6pvl"]
 [ext_resource type="PackedScene" uid="uid://d3prvbxntv3bm" path="res://control_option.tscn" id="13_fkiwe"]
 
 [node name="ControlsOptions" type="PanelContainer"]
@@ -9,6 +10,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_pkoba")
 single_option_scene = ExtResource("13_fkiwe")
+axis_data_scene = ExtResource("4_u6pvl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -27,7 +29,7 @@ layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-current_tab = 2
+current_tab = 3
 
 [node name="Keyboard" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
@@ -54,6 +56,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Controller" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 follow_focus = true
@@ -80,6 +83,19 @@ wait_time = 0.5
 
 [node name="JoyControlsParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controller/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Axes" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+follow_focus = true
+
+[node name="AxisDataParent" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Axes"]
+unique_name_in_owner = true
+auto_translate_mode = 1
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_horizontal = 3

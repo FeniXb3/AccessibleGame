@@ -1,10 +1,14 @@
 extends Resource
 class_name InputMapScheme
 
-signal vibration_strength_changed(new_value: float)
 
 @export var actions: Array[InputMapActionData] = []
 @export var vibration_strength: FloatVariable = FloatVariable.new(1)
+@export var axes: Array[InputAxisData] = []
+
+func get_axis_data(negative_action: StringName, positive_action: StringName) -> InputAxisData:
+	var filtered := axes.filter(func(iad): return iad.negative_action == negative_action and iad.positive_action == positive_action)
+	return filtered.front() if filtered else null
 
 func get_action_data(action: StringName) -> InputMapActionData:
 	var data = actions.filter(func(ad: InputMapActionData): return ad.action == action)

@@ -1,3 +1,4 @@
+class_name RangeFloatOption
 extends HBoxContainer
 
 @export var label_text : String
@@ -20,11 +21,11 @@ func _ready():
 
 func setup():
 	label.text = label_text
-	range_slider.value = variable.value
-	variable.value_changed.connect(_on_value_changed)
 	range_slider.min_value = min_value
 	range_slider.max_value = max_value
 	range_slider.step = step
+	range_slider.value = variable.value
+	variable.value_changed.connect(_on_value_changed)
 	value_label.text = "%.2f" % range_slider.value
 
 

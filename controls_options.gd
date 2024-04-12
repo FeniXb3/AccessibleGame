@@ -1,7 +1,9 @@
 extends PanelContainer
 
 @export var single_option_scene : PackedScene
+@export var axis_data_scene: PackedScene
 
+@onready var axis_data_parent: VBoxContainer = %AxisDataParent
 @onready var vibration_test_timer = %VibrationTestTimer
 @onready var vibration_strength_range_float_option = %VibrationStrengthRangeFloatOption
 @onready var keyboard_controls_parent = %KeyboardControlsParent
@@ -31,6 +33,13 @@ func _on_input_scheme_loaded():
 			controls_parents[remap_filter].add_child(new_control_option)
 			controls_parents[remap_filter].add_child(HSeparator.new())
 
+	var axes = input_scheme.axes
+
+	for axis_data in axes:
+		var axis_option: AxisDataOption = axis_data_scene.instantiate()
+		axis_option.axis_data = axis_data
+		axis_data_parent.add_child(axis_option)
+		axis_data_parent.add_child(HSeparator.new())
 
 func _on_reset_input_scheme_button_pressed():
 	for remap_filter in controls_parents:
