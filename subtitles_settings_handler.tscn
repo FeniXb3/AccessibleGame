@@ -1,0 +1,26 @@
+[gd_scene load_steps=12 format=3 uid="uid://dnqogdff6uce6"]
+
+[ext_resource type="Script" path="res://subtitles_settings_handler.gd" id="1_cdv6r"]
+[ext_resource type="Theme" uid="uid://4vu4f0juq27b" path="res://subtitles_theme.tres" id="2_vvnsi"]
+[ext_resource type="Resource" uid="uid://cqffss0kui1ur" path="res://variable_resources/font_size.tres" id="3_x6oax"]
+[ext_resource type="Resource" uid="uid://c6gwogoscagih" path="res://variable_resources/background_opacity.tres" id="4_h3mxa"]
+[ext_resource type="Resource" uid="uid://ccbgoiyacwxmf" path="res://variable_resources/background_color.tres" id="5_620a4"]
+[ext_resource type="Resource" uid="uid://c1x0uqbqesj8m" path="res://variable_resources/font_color.tres" id="6_higtx"]
+[ext_resource type="Resource" uid="uid://daoqrpi40vfol" path="res://variable_resources/outline_color.tres" id="7_jbrpu"]
+[ext_resource type="Resource" uid="uid://dmidi8q3yv828" path="res://variable_resources/outline_size.tres" id="8_qk3or"]
+[ext_resource type="Resource" uid="uid://cbphqr0cs3f2e" path="res://variable_resources/external_margin.tres" id="9_53e4c"]
+[ext_resource type="Resource" uid="uid://bh5x1rpfhp5hk" path="res://variable_resources/internal_margin.tres" id="10_ut6te"]
+[ext_resource type="Resource" uid="uid://rjxbhcam7ei1" path="res://variable_resources/corners_radius.tres" id="11_1erk6"]
+
+[node name="SubtitlesSettingsHandler" type="Node"]
+script = ExtResource("1_cdv6r")
+subtitles_theme = ExtResource("2_vvnsi")
+font_size = ExtResource("3_x6oax")
+background_opacity = ExtResource("4_h3mxa")
+background_color = ExtResource("5_620a4")
+font_color = ExtResource("6_higtx")
+outline_color = ExtResource("7_jbrpu")
+outline_size = ExtResource("8_qk3or")
+external_margin = ExtResource("9_53e4c")
+internal_margin = ExtResource("10_ut6te")
+corners_radius = ExtResource("11_1erk6")

@@ -3,6 +3,11 @@ class_name InputEnhancer
 static var loaded_signal_holder := LoadedSignalHolder.new()
 static var saved_path := "user://input_map_scheme.tres"
 static var default_path := "res://default_input_map_scheme.tres"
+static var pairs := [
+	{"negative": "_left", "positive": "_right"},
+	{"negative": "_up", "positive": "_down"},
+	{"negative": "_forward", "positive": "_back"},
+]
 
 static var wheel_down: InputEventMouseButton
 static var wheel_up: InputEventMouseButton
@@ -14,7 +19,7 @@ static var loaded: Signal:
 	get:
 		return loaded_signal_holder.loaded
 
-static func get_axis_or_mouse_wheel(negative_action: StringName, positive_action: StringName) -> float:
+static func get_mouse_wheel_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_value: float = 0
 
 	if action_has_mouse_wheel_event(negative_action) and Input.is_action_just_pressed(negative_action):
@@ -23,15 +28,22 @@ static func get_axis_or_mouse_wheel(negative_action: StringName, positive_action
 	if action_has_mouse_wheel_event(positive_action) and Input.is_action_just_pressed(positive_action):
 		axis_value += 1
 
+	return axis_value
+
+static func get_axis_multiplier(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_data = input_scheme.get_axis_data(negative_action, positive_action)
 	var multiplier = 1 if not axis_data \
 			else axis_data.sensitivity.value \
 			* (-1 if axis_data.is_inverted.value else 1)
 
-	return multiplier * (get_axis(negative_action, positive_action) + axis_value)
+	return multiplier
 
 static func get_axis(negative_action: StringName, positive_action: StringName) -> float:
-	return get_action_strength(positive_action) - get_action_strength(negative_action)
+	var wheel_axis = get_mouse_wheel_axis(negative_action, positive_action)
+	var multiplier = get_axis_multiplier(negative_action, positive_action)
+
+	var togglable_axis_strength := get_action_strength(positive_action) - get_action_strength(negative_action)
+	return multiplier * (togglable_axis_strength + wheel_axis)
 
 static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
 	if Input.is_action_just_pressed(action) and get_togglable(action):
@@ -91,26 +103,21 @@ static func save_default_scheme() -> void:
 		action_data.events.append_array(all_events)
 		input_map_scheme.actions.append(action_data)
 
-		if action.ends_with("_left"):
-			var axis_core_name := action.replace("_left", "")
-			if not axes.has(axis_core_name):
-				axes[axis_core_name] = InputAxisData.new()
-			axes[axis_core_name].negative_action = action
-		elif action.ends_with("_right"):
-			var axis_core_name := action.replace("_right", "")
-			if not axes.has(axis_core_name):
-				axes[axis_core_name] = InputAxisData.new()
-			axes[axis_core_name].positive_action = action
-		elif action.ends_with("_up"):
-			var axis_core_name := action.replace("_up", "")
-			if not axes.has(axis_core_name):
-				axes[axis_core_name] = InputAxisData.new()
-			axes[axis_core_name].negative_action = action
-		elif action.ends_with("_down"):
-			var axis_core_name := action.replace("_down", "")
-			if not axes.has(axis_core_name):
-				axes[axis_core_name] = InputAxisData.new()
-			axes[axis_core_name].positive_action = action
+		for pair in pairs:
+			if action.ends_with(pair.negative):
+				var axis_other_end := action.replace(pair.negative, pair.positive)
+				if not axes.has(axis_other_end):
+					axes[action] = InputAxisData.new()
+					axes[action].negative_action = action
+				else:
+					axes[axis_other_end].negative_action = action
+			elif action.ends_with(pair.positive):
+					var axis_other_end := action.replace(pair.positive, pair.negative)
+					if not axes.has(axis_other_end):
+						axes[action] = InputAxisData.new()
+						axes[action].positive_action = action
+					else:
+						axes[axis_other_end].positive_action = action
 
 	for axis in axes:
 		input_map_scheme.axes.append(axes[axis])
@@ -169,3 +176,23 @@ static func start_joy_vibration(device: int, weak_magnitude: float, strong_magni
 
 static func get_vibration_strength():
 	return input_scheme.vibration_strength.value
+
+static func get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone: float = -1.0) -> Vector2:
+	# TODO think about better implementation
+	#var x := get_axis(negative_x, positive_x)
+	#var y := get_axis(negative_y, positive_y)
+	var x_multiplier := get_axis_multiplier(negative_x, positive_x)
+	var y_multiplier := get_axis_multiplier(negative_y, positive_y)
+
+	# TODO: Handle mousemove
+	# TODO: Handle togglable
+	# TODO: Fix issue with sensitivity 0
+	var vector = Input.get_vector(negative_x, positive_x, negative_y, positive_y, deadzone)
+	vector.x += get_mouse_wheel_axis(negative_x, positive_x)
+	vector.y += get_mouse_wheel_axis(negative_y, positive_y)
+	vector.x *= x_multiplier
+	vector.y *= y_multiplier
+	print(vector)
+
+	return vector
+

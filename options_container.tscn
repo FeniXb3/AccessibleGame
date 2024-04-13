@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://knvc0sobddug"]
+
+[ext_resource type="PackedScene" uid="uid://ce7a7xsoyrdu7" path="res://subtitle_tester.tscn" id="1_dtomn"]
+[ext_resource type="Script" path="res://options_container.gd" id="1_px5f3"]
+[ext_resource type="PackedScene" uid="uid://dg0sj2af7ufac" path="res://subtitles_options.tscn" id="2_l7pju"]
+[ext_resource type="PackedScene" uid="uid://cntd5yssxjyv2" path="res://controls_options.tscn" id="3_h4oan"]
+
+[node name="OptionsContainer" type="PanelContainer"]
+auto_translate_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_px5f3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Options"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+
+[node name="SubtitleTester" parent="VBoxContainer/TabContainer" instance=ExtResource("1_dtomn")]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SubtitlesOptions" parent="VBoxContainer/TabContainer" instance=ExtResource("2_l7pju")]
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+
+[node name="ControlsOptions" parent="VBoxContainer/TabContainer" instance=ExtResource("3_h4oan")]
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

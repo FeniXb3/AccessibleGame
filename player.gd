@@ -26,13 +26,13 @@ func _physics_process(delta):
 		Input.stop_joy_vibration(1)
 		InputEnhancer.start_joy_vibration(last_used_device, 0.5, 0.5, 0.1)
 
-	var direction = InputEnhancer.get_axis_or_mouse_wheel("move_left", "move_right")
+	var direction = InputEnhancer.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	var rotate_direction = InputEnhancer.get_axis_or_mouse_wheel("rotate_left", "rotate_right")
+	var rotate_direction = InputEnhancer.get_axis("rotate_left", "rotate_right")
 
 	rotate(deg_to_rad(rotate_direction))
 	move_and_slide()
