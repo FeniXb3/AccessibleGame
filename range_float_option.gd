@@ -21,9 +21,11 @@ func _ready():
 
 func setup():
 	label.text = label_text
+	# There was a bug when step was set after setting min_value
+	# https://github.com/godotengine/godot/issues/72250#issuecomment-1410280978
+	range_slider.step = step
 	range_slider.min_value = min_value
 	range_slider.max_value = max_value
-	range_slider.step = step
 	range_slider.value = variable.value
 	variable.value_changed.connect(_on_value_changed)
 	value_label.text = "%.2f" % range_slider.value
