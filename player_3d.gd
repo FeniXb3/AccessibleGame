@@ -35,23 +35,21 @@ func _physics_process(delta: float) -> void:
 
 	# Based on https://stackoverflow.com/a/77147323/1816426
 	var camera_rotation := InputEnhancer.get_vector("camera_rotate_left", "camera_rotate_right", "camera_rotate_up", "camera_rotate_down") * delta
-	current_angles.x = wrapf(current_angles.x, -PI, PI) + camera_rotation.x
-	current_angles.y = wrapf(current_angles.y, -PI, PI) + camera_rotation.y
-
-	current_angles.x = clampf(
-		wrapf(current_angles.x, -PI, PI),
-		deg_to_rad(min_angles.x),
-		deg_to_rad(max_angles.x)
-	)
-
-	current_angles.y = clampf(
-		wrapf(current_angles.y, -PI, PI),
-		deg_to_rad(min_angles.y),
-		deg_to_rad(max_angles.y)
-	)
-
+	current_angles.x =_set_angle(current_angles.x, min_angles.x, max_angles.x, camera_rotation.x)
+	current_angles.y =_set_angle(current_angles.y, min_angles.y, max_angles.y, camera_rotation.y)
 
 	horizontal_pivot.basis = Basis(Vector3.UP, current_angles.x)
 	vertical_pivot.basis = Basis(Vector3.RIGHT, current_angles.y)
 
 	move_and_slide()
+
+func _set_angle(current_angle, min_angle, max_angle, input_rotation):
+	var new_angle = wrapf(current_angle, -PI, PI) + input_rotation
+
+	new_angle = clampf(
+		wrapf(new_angle, -PI, PI),
+		deg_to_rad(min_angle),
+		deg_to_rad(max_angle)
+	)
+
+	return new_angle
