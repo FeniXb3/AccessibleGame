@@ -3,7 +3,8 @@ extends CharacterBody3D
 @export var min_angles := Vector2(0, -45)
 @export var max_angles := Vector2(360, 90)
 
-@export var current_angles := Vector2(0, 0)
+@export var camera_angles := Vector2(0, 0)
+@export var character_rotation := 0.0
 
 @onready var horizontal_pivot: Node3D = %HorizontalPivot
 @onready var vertical_pivot: Node3D = %VerticalPivot
@@ -24,8 +25,11 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := InputEnhancer.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y))#.normalized()
+	var input_dir := InputEnhancer.get_axis("move_forward", "move_back")
+	var input_rotation := InputEnhancer.get_axis("rotate_right", "rotate_left") * delta
+	character_rotation = _set_angle(character_rotation, min_angles.x, max_angles.x, input_rotation)
+	transform.basis = Basis(Vector3.UP, character_rotation)
+	var direction := (transform.basis * Vector3(0, 0, input_dir))#.normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -35,11 +39,11 @@ func _physics_process(delta: float) -> void:
 
 	# Based on https://stackoverflow.com/a/77147323/1816426
 	var camera_rotation := InputEnhancer.get_vector("camera_rotate_left", "camera_rotate_right", "camera_rotate_up", "camera_rotate_down") * delta
-	current_angles.x =_set_angle(current_angles.x, min_angles.x, max_angles.x, camera_rotation.x)
-	current_angles.y =_set_angle(current_angles.y, min_angles.y, max_angles.y, camera_rotation.y)
+	camera_angles.x =_set_angle(camera_angles.x, min_angles.x, max_angles.x, camera_rotation.x)
+	camera_angles.y =_set_angle(camera_angles.y, min_angles.y, max_angles.y, camera_rotation.y)
 
-	horizontal_pivot.basis = Basis(Vector3.UP, current_angles.x)
-	vertical_pivot.basis = Basis(Vector3.RIGHT, current_angles.y)
+	horizontal_pivot.basis = Basis(Vector3.UP, camera_angles.x)
+	vertical_pivot.basis = Basis(Vector3.RIGHT, camera_angles.y)
 
 	move_and_slide()
 
