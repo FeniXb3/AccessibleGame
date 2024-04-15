@@ -32,7 +32,7 @@ func _input(event):
 	if InputEnhancer.is_joy_motion_in_deadzone(action, event):
 		return
 
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and abs(event.relative.length()) < 10 :
 		return
 
 	get_viewport().set_input_as_handled()

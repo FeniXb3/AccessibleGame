@@ -1,7 +1,7 @@
 @tool
 extends Resource
 class_name KeyIcon
-enum InputTypes {KEYBOARD, MOUSE, JOY_BUTTON, JOY_AXIS}
+enum InputTypes {KEYBOARD, MOUSE, JOY_BUTTON, JOY_AXIS, MOUSE_MOTION}
 @export var input_type: InputTypes = InputTypes.KEYBOARD
 
 ## The keycode, its value depends on its type

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputMapScheme" load_steps=55 format=3]
+[gd_resource type="Resource" script_class="InputMapScheme" load_steps=55 format=3 uid="uid://fkvvqgvqnvwg"]
 
 [ext_resource type="Script" path="res://input_map_action_data.gd" id="1_yijs3"]
 [ext_resource type="Script" path="res://variable_resource_types/bool_variable.gd" id="2_rbdbo"]
@@ -210,7 +210,7 @@ script = ExtResource("1_yijs3")
 action = &"camera_rotate_down"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_ygjey"), SubResource("InputEventJoypadMotion_kvaye")])
+events = Array[InputEvent]([SubResource("InputEventKey_ygjey"), SubResource("InputEventJoypadMotion_kvaye"), null])
 
 [sub_resource type="Resource" id="Resource_kgcuc"]
 script = ExtResource("2_rbdbo")
