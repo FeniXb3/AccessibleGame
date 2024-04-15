@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmr4fji3qio5m"]
+[gd_scene load_steps=13 format=3 uid="uid://bmr4fji3qio5m"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_ed7e5"]
 [ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://subtitles_layer.tscn" id="2_xyd6l"]
 [ext_resource type="PackedScene" uid="uid://knvc0sobddug" path="res://options_container.tscn" id="3_6ivyq"]
 [ext_resource type="PackedScene" uid="uid://cg0tq63gqtc2m" path="res://player_tpp.tscn" id="5_57v3v"]
 [ext_resource type="PackedScene" uid="uid://dnqogdff6uce6" path="res://subtitles_settings_handler.tscn" id="5_rhvi0"]
+[ext_resource type="Texture2D" uid="uid://b22av5chlgb4q" path="res://icon.png" id="6_3t6ys"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y0p6f"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +22,9 @@ glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4jg10"]
 size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1mcy"]
+albedo_texture = ExtResource("6_3t6ys")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_23lmm"]
 size = Vector3(100, 0.01, 100)
@@ -53,9 +57,6 @@ visible = false
 [node name="Gameplay3D" type="Node3D" parent="."]
 process_mode = 1
 
-[node name="Camera3D" type="Camera3D" parent="Gameplay3D"]
-transform = Transform3D(1, 0, 0, 0, 0.927465, 0.373911, 0, -0.373911, 0.927465, 0, 2.7533, 3.86897)
-
 [node name="PlayerTPP" parent="Gameplay3D" instance=ExtResource("5_57v3v")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Gameplay3D"]
@@ -63,6 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.140603, 0)
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Gameplay3D/StaticBody3D"]
 mesh = SubResource("PlaneMesh_4jg10")
+material = SubResource("StandardMaterial3D_q1mcy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Gameplay3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_23lmm")
