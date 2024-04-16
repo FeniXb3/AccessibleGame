@@ -41,4 +41,3 @@ func _input(event: InputEvent) -> void:
 	if InputEnhancer.is_joy_motion_in_deadzone("ui_left", event):
 		return
 	last_used_device = event.device
-	print(event.device)

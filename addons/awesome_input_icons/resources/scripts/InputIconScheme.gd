@@ -327,15 +327,15 @@ func get_key_icon_by_axis(axis: int, axis_value: float):
 	return null
 
 func get_key_icon_by_relative_motion(relative: Vector2i):
-	var pseudo_keycode := -1
+	var axis_index := -1
 
 	if abs(relative.x) > abs(relative.y):
-		pseudo_keycode = Vector2.AXIS_X
+		axis_index = Vector2.AXIS_X
 	else:
-		pseudo_keycode = Vector2.AXIS_Y
+		axis_index = Vector2.AXIS_Y
 
 	for key_icon in mouse_motions:
-		if key_icon.keycode == pseudo_keycode and is_equal_approx(key_icon.axis_value, signf(relative[pseudo_keycode])):
+		if key_icon.keycode == axis_index and is_equal_approx(key_icon.axis_value, signf(relative[axis_index])):
 			return key_icon
 	return null
 

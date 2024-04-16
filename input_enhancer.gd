@@ -1,4 +1,5 @@
-class_name InputEnhancer
+#class_name InputEnhancer
+extends Node
 
 static var loaded_signal_holder := LoadedSignalHolder.new()
 static var saved_path := "user://input_map_scheme.tres"
@@ -8,12 +9,25 @@ static var pairs := [
 	{"negative": "_up", "positive": "_down"},
 	{"negative": "_forward", "positive": "_back"},
 ]
+static var mouse_motion: Vector2
+
+static var mouse_motion_default_events := {
+	"camera_rotate_up": _create_mouse_motioon(Vector2.AXIS_Y, -1),
+	"camera_rotate_down": _create_mouse_motioon(Vector2.AXIS_Y, 1),
+	"camera_rotate_left": _create_mouse_motioon(Vector2.AXIS_X, -1),
+	"camera_rotate_right": _create_mouse_motioon(Vector2.AXIS_X, 1),
+}
+
+static func _create_mouse_motioon(axis_index: int, value: int) -> InputEventMouseMotion:
+	var event := InputEventMouseMotion.new()
+	event.relative[axis_index] = value
+
+	return event
 
 static var wheel_down: InputEventMouseButton
 static var wheel_up: InputEventMouseButton
-static var action_togglable_map: Dictionary = {}
 static var action_toggle_state_map: Dictionary = {}
-static var input_scheme : InputMapScheme#.new()
+static var input_scheme : InputMapScheme
 
 static var loaded: Signal:
 	get:
@@ -30,6 +44,11 @@ static func get_mouse_wheel_axis(negative_action: StringName, positive_action: S
 
 	return axis_value
 
+static func get_mouse_motion_axis(negative_action: StringName, positive_action: StringName) -> float:
+	return get_action_mouse_motion(positive_action) - get_action_mouse_motion(negative_action)
+
+#static func get_mouse_motion_action(action: StringName)
+
 static func get_axis_multiplier(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_data = input_scheme.get_axis_data(negative_action, positive_action)
 	var multiplier = 1 if not axis_data \
@@ -40,10 +59,11 @@ static func get_axis_multiplier(negative_action: StringName, positive_action: St
 
 static func get_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var wheel_axis = get_mouse_wheel_axis(negative_action, positive_action)
+	var mouse_axis = get_mouse_motion_axis(negative_action, positive_action)
 	var multiplier = get_axis_multiplier(negative_action, positive_action)
 
 	var togglable_axis_strength := get_action_strength(positive_action) - get_action_strength(negative_action)
-	return multiplier * (togglable_axis_strength + wheel_axis)
+	return multiplier * clampf(togglable_axis_strength + wheel_axis + mouse_axis, -1.0, 1.0)
 
 static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
 	if Input.is_action_just_pressed(action) and get_togglable(action):
@@ -101,6 +121,9 @@ static func save_default_scheme() -> void:
 
 		var all_events := InputMap.action_get_events(action)
 		action_data.events.append_array(all_events)
+		if mouse_motion_default_events.has(action):
+			action_data.events.append(mouse_motion_default_events[action])
+
 		input_map_scheme.actions.append(action_data)
 
 		for pair in pairs:
@@ -190,9 +213,57 @@ static func get_vector(negative_x: StringName, positive_x: StringName, negative_
 	var vector = Input.get_vector(negative_x, positive_x, negative_y, positive_y, deadzone)
 	vector.x += get_mouse_wheel_axis(negative_x, positive_x)
 	vector.y += get_mouse_wheel_axis(negative_y, positive_y)
+	vector.x += get_mouse_motion_axis(negative_x, positive_x)
+	vector.y += get_mouse_motion_axis(negative_y, positive_y)
 	vector.x *= x_multiplier
 	vector.y *= y_multiplier
-	print(vector)
 
 	return vector
 
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and event.relative.length() > 1:
+		var x := clampf(remap(event.relative.x, -10, 10, -1, 1), -1, 1)
+		var y := clampf(remap(event.relative.y, -10, 10, -1, 1), -1, 1)
+
+		mouse_motion = Vector2(x, y)
+
+	call_deferred("_reset_mouse_motion")
+
+func _reset_mouse_motion() -> void:
+	mouse_motion = Vector2.ZERO
+
+
+static func filter_mouse_motion(e) -> bool:
+	print(InputEnhancer.mouse_motion)
+	if e is InputEventMouseMotion:
+		var axis_index := -1
+		if abs(e.relative.x) > abs(e.relative.y):
+			axis_index = Vector2.AXIS_X
+		else:
+			axis_index = Vector2.AXIS_Y
+
+		if not is_equal_approx(mouse_motion[axis_index], 0):
+			if is_equal_approx(signf(e.relative[axis_index]), signf(mouse_motion[axis_index])):
+				return true
+
+	return false
+
+static func get_action_mouse_motion(action: StringName) -> float:
+	var events := get_action_data(action).events.filter(filter_mouse_motion
+	)
+
+	if events.size() == 0:
+		return 0
+
+	var value: float = 0.0
+
+	for e in events:
+		var axis_index := -1
+		if abs(e.relative.x) > abs(e.relative.y):
+			axis_index = Vector2.AXIS_X
+		else:
+			axis_index = Vector2.AXIS_Y
+
+		value += abs(mouse_motion[axis_index])
+	return minf(value, 1.0)
