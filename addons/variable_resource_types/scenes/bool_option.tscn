@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cihlmra6al7ce"]
+
+[ext_resource type="Script" path="res://addons/variable_resource_types/scripts/bool_option.gd" id="1_jn32n"]
+
+[node name="BoolOption" type="HBoxContainer"]
+auto_translate_mode = 1
+script = ExtResource("1_jn32n")
+
+[node name="ValueCheckButton" type="CheckButton" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Check"
+
+[connection signal="toggled" from="ValueCheckButton" to="." method="_on_value_check_button_toggled"]

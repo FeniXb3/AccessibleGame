@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxgwpxo5yy2gv"]
+
+[ext_resource type="Texture2D" uid="uid://ckcwjdd7j78un" path="res://addons/kenney_ui_pack/PNG/blue_boxCross.png" id="1_oucgj"]
+[ext_resource type="Script" path="res://addons/enhanced_input/scripts/action_remap_button.gd" id="2_eilkb"]
+
+[node name="ActionRemapButton" type="Button"]
+custom_minimum_size = Vector2(100, 50)
+theme_type_variation = &"InputControlIconButton"
+text = " "
+icon = ExtResource("1_oucgj")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_eilkb")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

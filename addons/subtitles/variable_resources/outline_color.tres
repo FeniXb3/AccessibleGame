@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ColorVariable" load_steps=2 format=3 uid="uid://daoqrpi40vfol"]
+
+[ext_resource type="Script" path="res://addons/variable_resource_types/scripts/resource_types/color_variable.gd" id="1_isuxu"]
+
+[resource]
+script = ExtResource("1_isuxu")
+value = Color(0, 0, 0, 1)

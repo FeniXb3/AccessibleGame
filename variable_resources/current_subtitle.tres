@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="StringVariable" load_steps=2 format=3 uid="uid://1e3uvh04ldig"]
-
-[ext_resource type="Script" path="res://variable_resource_types/string_variable.gd" id="1_4pkhq"]
-
-[resource]
-script = ExtResource("1_4pkhq")
-value = "qwerty"

@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="IntVariable" load_steps=2 format=3 uid="uid://dmidi8q3yv828"]
-
-[ext_resource type="Script" path="res://variable_resource_types/int_variable.gd" id="1_3uiaj"]
-
-[resource]
-script = ExtResource("1_3uiaj")
-value = 0

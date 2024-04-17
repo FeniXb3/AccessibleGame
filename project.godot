@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="AccessibleGame"
-run/main_scene="res://game3d.tscn"
+run/main_scene="res://scenes/game3d.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
 [autoload]
 
-Captions="*res://captions.gd"
-InputEnhancer="*res://input_enhancer.gd"
+Captions="*res://addons/subtitles/captions.gd"
+InputEnhancer="*res://addons/enhanced_input/input_enhancer.gd"
 
 [editor_plugins]
 

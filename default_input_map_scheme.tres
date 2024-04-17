@@ -1,22 +1,22 @@
 [gd_resource type="Resource" script_class="InputMapScheme" load_steps=66 format=3]
 
-[ext_resource type="Script" path="res://input_map_action_data.gd" id="1_gb13g"]
-[ext_resource type="Script" path="res://variable_resource_types/bool_variable.gd" id="2_oyo8u"]
-[ext_resource type="Script" path="res://input_axis_data.gd" id="3_s5dgn"]
-[ext_resource type="Script" path="res://variable_resource_types/float_variable.gd" id="4_um252"]
-[ext_resource type="Script" path="res://input_map_scheme.gd" id="5_x54j0"]
+[ext_resource type="Script" path="res://addons/enhanced_input/scripts/resource_types/input_map_action_data.gd" id="1_2uk3o"]
+[ext_resource type="Script" path="res://addons/variable_resource_types/scripts/resource_types/bool_variable.gd" id="2_md8l4"]
+[ext_resource type="Script" path="res://addons/enhanced_input/scripts/resource_types/input_axis_data.gd" id="3_75ie4"]
+[ext_resource type="Script" path="res://addons/variable_resource_types/scripts/resource_types/float_variable.gd" id="4_u6gux"]
+[ext_resource type="Script" path="res://addons/enhanced_input/scripts/resource_types/input_map_scheme.gd" id="5_bxmm0"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_xq22s"]
+[sub_resource type="InputEventKey" id="InputEventKey_3q2ol"]
 device = -1
 physical_keycode = 65
 unicode = 97
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_day4u"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_g5jtb"]
 device = -1
 button_index = 13
 pressed = true
 
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_3w8bm"]
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_ijmut"]
 device = -1
 button_mask = 8
 position = Vector2(109, 17)
@@ -24,28 +24,28 @@ global_position = Vector2(112, 49)
 button_index = 4
 pressed = true
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_wn51v"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_vfxfe"]
 device = -1
 axis_value = -1.0
 
-[sub_resource type="Resource" id="Resource_0ek5n"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_557pp"]
+script = ExtResource("1_2uk3o")
 action = &"rotate_left"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_xq22s"), SubResource("InputEventJoypadButton_day4u"), SubResource("InputEventMouseButton_3w8bm"), SubResource("InputEventJoypadMotion_wn51v")])
+events = Array[InputEvent]([SubResource("InputEventKey_3q2ol"), SubResource("InputEventJoypadButton_g5jtb"), SubResource("InputEventMouseButton_ijmut"), SubResource("InputEventJoypadMotion_vfxfe")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_sk2kl"]
+[sub_resource type="InputEventKey" id="InputEventKey_m6vln"]
 device = -1
 physical_keycode = 68
 unicode = 100
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ft4lp"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fnjnt"]
 device = -1
 button_index = 14
 pressed = true
 
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_4ubv4"]
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_dsv0f"]
 device = -1
 button_mask = 16
 position = Vector2(183, 4)
@@ -53,33 +53,33 @@ global_position = Vector2(186, 36)
 button_index = 5
 pressed = true
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_5odix"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_jy1ba"]
 device = -1
 axis_value = 1.0
 
-[sub_resource type="Resource" id="Resource_ief0w"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_3cqb0"]
+script = ExtResource("1_2uk3o")
 action = &"rotate_right"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_sk2kl"), SubResource("InputEventJoypadButton_ft4lp"), SubResource("InputEventMouseButton_4ubv4"), SubResource("InputEventJoypadMotion_5odix")])
+events = Array[InputEvent]([SubResource("InputEventKey_m6vln"), SubResource("InputEventJoypadButton_fnjnt"), SubResource("InputEventMouseButton_dsv0f"), SubResource("InputEventJoypadMotion_jy1ba")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_rk11y"]
+[sub_resource type="InputEventKey" id="InputEventKey_xb5j1"]
 device = -1
 physical_keycode = 87
 unicode = 119
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_30ald"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pbog7"]
 device = -1
 button_index = 11
 pressed = true
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_dp187"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_4b24t"]
 device = -1
 axis = 1
 axis_value = -1.0
 
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_tq0iu"]
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_3knyo"]
 device = -1
 button_mask = 1
 position = Vector2(194, 18)
@@ -87,29 +87,29 @@ global_position = Vector2(197, 50)
 button_index = 1
 pressed = true
 
-[sub_resource type="Resource" id="Resource_0nmq7"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_42kka"]
+script = ExtResource("1_2uk3o")
 action = &"move_forward"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_rk11y"), SubResource("InputEventJoypadButton_30ald"), SubResource("InputEventJoypadMotion_dp187"), SubResource("InputEventMouseButton_tq0iu")])
+events = Array[InputEvent]([SubResource("InputEventKey_xb5j1"), SubResource("InputEventJoypadButton_pbog7"), SubResource("InputEventJoypadMotion_4b24t"), SubResource("InputEventMouseButton_3knyo")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_pqal0"]
+[sub_resource type="InputEventKey" id="InputEventKey_j8wuo"]
 device = -1
 physical_keycode = 83
 unicode = 115
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_73agi"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_dxcw4"]
 device = -1
 axis = 1
 axis_value = 1.0
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pu3tt"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_vn8dr"]
 device = -1
 button_index = 12
 pressed = true
 
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_t8fgu"]
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_0ojqd"]
 device = -1
 button_mask = 2
 position = Vector2(183, 12)
@@ -117,23 +117,23 @@ global_position = Vector2(186, 44)
 button_index = 2
 pressed = true
 
-[sub_resource type="Resource" id="Resource_vyba0"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_gquso"]
+script = ExtResource("1_2uk3o")
 action = &"move_back"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_pqal0"), SubResource("InputEventJoypadMotion_73agi"), SubResource("InputEventJoypadButton_pu3tt"), SubResource("InputEventMouseButton_t8fgu")])
+events = Array[InputEvent]([SubResource("InputEventKey_j8wuo"), SubResource("InputEventJoypadMotion_dxcw4"), SubResource("InputEventJoypadButton_vn8dr"), SubResource("InputEventMouseButton_0ojqd")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_dvfv8"]
+[sub_resource type="InputEventKey" id="InputEventKey_8rcgb"]
 device = -1
 physical_keycode = 32
 unicode = 32
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_4n6jh"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_jv7sm"]
 device = -1
 pressed = true
 
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_amc6h"]
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_mbqyt"]
 device = -1
 button_mask = 4
 position = Vector2(341, 22)
@@ -141,194 +141,194 @@ global_position = Vector2(345, 63)
 button_index = 3
 pressed = true
 
-[sub_resource type="Resource" id="Resource_3k00m"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_7y7pj"]
+script = ExtResource("1_2uk3o")
 action = &"jump"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_dvfv8"), SubResource("InputEventJoypadButton_4n6jh"), SubResource("InputEventMouseButton_amc6h")])
+events = Array[InputEvent]([SubResource("InputEventKey_8rcgb"), SubResource("InputEventJoypadButton_jv7sm"), SubResource("InputEventMouseButton_mbqyt")])
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_evy5c"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_bo4r3"]
 device = -1
 axis = 2
 axis_value = -1.0
 
-[sub_resource type="InputEventKey" id="InputEventKey_2wjkn"]
+[sub_resource type="InputEventKey" id="InputEventKey_0lyjp"]
 device = -1
 physical_keycode = 4194319
 
-[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_qxpmh"]
+[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_6e0lj"]
 relative = Vector2(-1, 0)
 
-[sub_resource type="Resource" id="Resource_f5ti1"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_oywxh"]
+script = ExtResource("1_2uk3o")
 action = &"camera_rotate_left"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_evy5c"), SubResource("InputEventKey_2wjkn"), SubResource("InputEventMouseMotion_qxpmh")])
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_bo4r3"), SubResource("InputEventKey_0lyjp"), SubResource("InputEventMouseMotion_6e0lj")])
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_vwfq7"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_wo1ia"]
 device = -1
 axis = 2
 axis_value = 1.0
 
-[sub_resource type="InputEventKey" id="InputEventKey_xp2xj"]
+[sub_resource type="InputEventKey" id="InputEventKey_8cvrp"]
 device = -1
 physical_keycode = 4194321
 
-[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_2vt21"]
+[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_v0m52"]
 relative = Vector2(1, 0)
 
-[sub_resource type="Resource" id="Resource_13uo8"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_ja5tr"]
+script = ExtResource("1_2uk3o")
 action = &"camera_rotate_right"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_vwfq7"), SubResource("InputEventKey_xp2xj"), SubResource("InputEventMouseMotion_2vt21")])
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_wo1ia"), SubResource("InputEventKey_8cvrp"), SubResource("InputEventMouseMotion_v0m52")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_0en58"]
+[sub_resource type="InputEventKey" id="InputEventKey_ttyne"]
 device = -1
 physical_keycode = 4194320
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_rw1bi"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_1hsgd"]
 device = -1
 axis = 3
 axis_value = -1.0
 
-[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_5afvb"]
+[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_elj1n"]
 relative = Vector2(0, -1)
 
-[sub_resource type="Resource" id="Resource_6p0bx"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_7exwu"]
+script = ExtResource("1_2uk3o")
 action = &"camera_rotate_up"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_0en58"), SubResource("InputEventJoypadMotion_rw1bi"), SubResource("InputEventMouseMotion_5afvb")])
+events = Array[InputEvent]([SubResource("InputEventKey_ttyne"), SubResource("InputEventJoypadMotion_1hsgd"), SubResource("InputEventMouseMotion_elj1n")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_efuo7"]
+[sub_resource type="InputEventKey" id="InputEventKey_ai2h8"]
 device = -1
 physical_keycode = 4194322
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_131fg"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_xheqr"]
 device = -1
 axis = 3
 axis_value = 1.0
 
-[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_niuox"]
+[sub_resource type="InputEventMouseMotion" id="InputEventMouseMotion_hhwtr"]
 relative = Vector2(0, 1)
 
-[sub_resource type="Resource" id="Resource_2ipba"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_6o3s4"]
+script = ExtResource("1_2uk3o")
 action = &"camera_rotate_down"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_efuo7"), SubResource("InputEventJoypadMotion_131fg"), SubResource("InputEventMouseMotion_niuox")])
+events = Array[InputEvent]([SubResource("InputEventKey_ai2h8"), SubResource("InputEventJoypadMotion_xheqr"), SubResource("InputEventMouseMotion_hhwtr")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_2wkwx"]
+[sub_resource type="InputEventKey" id="InputEventKey_j71yi"]
 device = -1
 physical_keycode = 65
 unicode = 97
 
-[sub_resource type="Resource" id="Resource_eoedu"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_efkjs"]
+script = ExtResource("1_2uk3o")
 action = &"move_left"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_2wkwx")])
+events = Array[InputEvent]([SubResource("InputEventKey_j71yi")])
 
-[sub_resource type="InputEventKey" id="InputEventKey_yfi5k"]
+[sub_resource type="InputEventKey" id="InputEventKey_c8b2a"]
 device = -1
 physical_keycode = 68
 unicode = 100
 
-[sub_resource type="Resource" id="Resource_xi2nm"]
-script = ExtResource("1_gb13g")
+[sub_resource type="Resource" id="Resource_xfabw"]
+script = ExtResource("1_2uk3o")
 action = &"move_right"
 is_togglable = false
 deadzone = 0.5
-events = Array[InputEvent]([SubResource("InputEventKey_yfi5k")])
+events = Array[InputEvent]([SubResource("InputEventKey_c8b2a")])
 
-[sub_resource type="Resource" id="Resource_pgoas"]
-script = ExtResource("2_oyo8u")
+[sub_resource type="Resource" id="Resource_yxltw"]
+script = ExtResource("2_md8l4")
 value = false
 
-[sub_resource type="Resource" id="Resource_g8odt"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_sdofe"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_lmv35"]
-script = ExtResource("3_s5dgn")
+[sub_resource type="Resource" id="Resource_bhrlk"]
+script = ExtResource("3_75ie4")
 negative_action = &"rotate_left"
 positive_action = &"rotate_right"
-sensitivity = SubResource("Resource_g8odt")
-is_inverted = SubResource("Resource_pgoas")
+sensitivity = SubResource("Resource_sdofe")
+is_inverted = SubResource("Resource_yxltw")
 
-[sub_resource type="Resource" id="Resource_7o204"]
-script = ExtResource("2_oyo8u")
+[sub_resource type="Resource" id="Resource_74tbs"]
+script = ExtResource("2_md8l4")
 value = false
 
-[sub_resource type="Resource" id="Resource_yay08"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_hj1gs"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_8rggn"]
-script = ExtResource("3_s5dgn")
+[sub_resource type="Resource" id="Resource_n5o3d"]
+script = ExtResource("3_75ie4")
 negative_action = &"move_forward"
 positive_action = &"move_back"
-sensitivity = SubResource("Resource_yay08")
-is_inverted = SubResource("Resource_7o204")
+sensitivity = SubResource("Resource_hj1gs")
+is_inverted = SubResource("Resource_74tbs")
 
-[sub_resource type="Resource" id="Resource_fkaml"]
-script = ExtResource("2_oyo8u")
+[sub_resource type="Resource" id="Resource_6ovju"]
+script = ExtResource("2_md8l4")
 value = false
 
-[sub_resource type="Resource" id="Resource_t7y1p"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_nyic7"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_jep2k"]
-script = ExtResource("3_s5dgn")
+[sub_resource type="Resource" id="Resource_syi0c"]
+script = ExtResource("3_75ie4")
 negative_action = &"camera_rotate_left"
 positive_action = &"camera_rotate_right"
-sensitivity = SubResource("Resource_t7y1p")
-is_inverted = SubResource("Resource_fkaml")
+sensitivity = SubResource("Resource_nyic7")
+is_inverted = SubResource("Resource_6ovju")
 
-[sub_resource type="Resource" id="Resource_wmewy"]
-script = ExtResource("2_oyo8u")
+[sub_resource type="Resource" id="Resource_o6es4"]
+script = ExtResource("2_md8l4")
 value = false
 
-[sub_resource type="Resource" id="Resource_x8upm"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_ti7s2"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_6t4ik"]
-script = ExtResource("3_s5dgn")
+[sub_resource type="Resource" id="Resource_etjwj"]
+script = ExtResource("3_75ie4")
 negative_action = &"camera_rotate_up"
 positive_action = &"camera_rotate_down"
-sensitivity = SubResource("Resource_x8upm")
-is_inverted = SubResource("Resource_wmewy")
+sensitivity = SubResource("Resource_ti7s2")
+is_inverted = SubResource("Resource_o6es4")
 
-[sub_resource type="Resource" id="Resource_70t6w"]
-script = ExtResource("2_oyo8u")
+[sub_resource type="Resource" id="Resource_7acsb"]
+script = ExtResource("2_md8l4")
 value = false
 
-[sub_resource type="Resource" id="Resource_q208f"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_vgxb1"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_3wwm5"]
-script = ExtResource("3_s5dgn")
+[sub_resource type="Resource" id="Resource_54yc5"]
+script = ExtResource("3_75ie4")
 negative_action = &"move_left"
 positive_action = &"move_right"
-sensitivity = SubResource("Resource_q208f")
-is_inverted = SubResource("Resource_70t6w")
+sensitivity = SubResource("Resource_vgxb1")
+is_inverted = SubResource("Resource_7acsb")
 
-[sub_resource type="Resource" id="Resource_dp813"]
-script = ExtResource("4_um252")
+[sub_resource type="Resource" id="Resource_oywm0"]
+script = ExtResource("4_u6gux")
 value = 1.0
 
 [resource]
-script = ExtResource("5_x54j0")
-actions = Array[ExtResource("1_gb13g")]([SubResource("Resource_0ek5n"), SubResource("Resource_ief0w"), SubResource("Resource_0nmq7"), SubResource("Resource_vyba0"), SubResource("Resource_3k00m"), SubResource("Resource_f5ti1"), SubResource("Resource_13uo8"), SubResource("Resource_6p0bx"), SubResource("Resource_2ipba"), SubResource("Resource_eoedu"), SubResource("Resource_xi2nm")])
-vibration_strength = SubResource("Resource_dp813")
-axes = Array[ExtResource("3_s5dgn")]([SubResource("Resource_lmv35"), SubResource("Resource_8rggn"), SubResource("Resource_jep2k"), SubResource("Resource_6t4ik"), SubResource("Resource_3wwm5")])
+script = ExtResource("5_bxmm0")
+actions = Array[ExtResource("1_2uk3o")]([SubResource("Resource_557pp"), SubResource("Resource_3cqb0"), SubResource("Resource_42kka"), SubResource("Resource_gquso"), SubResource("Resource_7y7pj"), SubResource("Resource_oywxh"), SubResource("Resource_ja5tr"), SubResource("Resource_7exwu"), SubResource("Resource_6o3s4"), SubResource("Resource_efkjs"), SubResource("Resource_xfabw")])
+vibration_strength = SubResource("Resource_oywm0")
+axes = Array[ExtResource("3_75ie4")]([SubResource("Resource_bhrlk"), SubResource("Resource_n5o3d"), SubResource("Resource_syi0c"), SubResource("Resource_etjwj"), SubResource("Resource_54yc5")])
