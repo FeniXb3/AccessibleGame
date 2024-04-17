@@ -8,3 +8,4 @@ signal value_changed(new_value : bool)
 		if not value == new_value:
 			value = new_value
 			value_changed.emit(value)
+			emit_changed()

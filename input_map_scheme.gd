@@ -6,6 +6,25 @@ class_name InputMapScheme
 @export var vibration_strength: FloatVariable = FloatVariable.new(1)
 @export var axes: Array[InputAxisData] = []
 
+static func load(path: String) -> InputMapScheme:
+	var scheme := ResourceLoader.load(path, "InputMapScheme") as InputMapScheme
+	scheme._connect_sub_resources()
+
+	return scheme
+
+func _connect_sub_resources() -> void:
+	vibration_strength.changed.connect(emit_changed)
+	for action_data in actions:
+		action_data.changed.connect(emit_changed)
+
+	for axis in axes:
+		axis.connect_sub_resources()
+		axis.changed.connect(emit_changed)
+
+func add_axis(axis: InputAxisData) -> void:
+	axis.changed.connect(emit_changed)
+	axes.append(axis)
+
 func get_axis_data(negative_action: StringName, positive_action: StringName) -> InputAxisData:
 	var filtered := axes.filter(func(iad): return iad.negative_action == negative_action and iad.positive_action == positive_action)
 	return filtered.front() if filtered else null

@@ -93,15 +93,16 @@ static func get_togglable(action: StringName) -> bool:
 static func set_togglable(action: StringName, state: bool):
 	input_scheme.set_action_togglable(action, state)
 	action_toggle_state_map[action] = false
-	save_current_scheme()
+	#save_current_scheme()
 
 static func set_deadzone(action: StringName, value: float) -> void:
 	InputMap.action_set_deadzone(action, value)
 	input_scheme.set_action_deadzone(action, value)
-	save_current_scheme()
+	#save_current_scheme()
 
 static func get_action_data(action: StringName) -> InputMapActionData:
 	return input_scheme.get_action_data(action)
+
 
 static func save_current_scheme() -> void:
 	ResourceSaver.save(input_scheme, saved_path)
@@ -143,7 +144,7 @@ static func save_default_scheme() -> void:
 						axes[axis_other_end].positive_action = action
 
 	for axis in axes:
-		input_map_scheme.axes.append(axes[axis])
+		input_map_scheme.add_axis(axes[axis])
 
 	ResourceSaver.save(input_map_scheme, default_path)
 
@@ -155,14 +156,14 @@ static func reset_input_scheme() -> void:
 
 static func load_input_scheme() -> void:
 	if FileAccess.file_exists(saved_path):
-		input_scheme = ResourceLoader.load(saved_path, "InputMapScheme")
+		input_scheme = InputMapScheme.load(saved_path)
 		print("saved")
 	else:
 		print("default")
 		if not FileAccess.file_exists(default_path):
 			print("create default")
 			save_default_scheme()
-		input_scheme = ResourceLoader.load(default_path, "InputMapScheme").duplicate(true)
+		input_scheme = InputMapScheme.load(default_path)
 
 	for action_data in input_scheme.actions:
 		var action := action_data.action
@@ -175,6 +176,7 @@ static func load_input_scheme() -> void:
 		for event in action_data.events:
 			InputMap.action_add_event(action, event)
 
+	input_scheme.changed.connect(save_current_scheme)
 	loaded_signal_holder.loaded.emit()
 
 static func replace_event(action: StringName, old_event: InputEvent, new_event: InputEvent):
@@ -184,7 +186,7 @@ static func replace_event(action: StringName, old_event: InputEvent, new_event: 
 
 	InputMap.action_add_event(action, new_event)
 	input_scheme.add_action_event(action, new_event)
-	save_current_scheme()
+	#save_current_scheme()
 
 static func is_joy_motion_in_deadzone(action: StringName, event: InputEvent):
 	return event is InputEventJoypadMotion and absf(event.axis_value) < InputMap.action_get_deadzone(action)
@@ -192,7 +194,7 @@ static func is_joy_motion_in_deadzone(action: StringName, event: InputEvent):
 static func action_erase_event(action: StringName, event: InputEvent) -> void:
 	InputMap.action_erase_event(action, event)
 	input_scheme.remove_action_event(action, event)
-	save_current_scheme()
+	#save_current_scheme()
 
 static func start_joy_vibration(device: int, weak_magnitude: float, strong_magnitude: float, duration: float = 0) -> void:
 	Input.start_joy_vibration(device, weak_magnitude * get_vibration_strength(), strong_magnitude * get_vibration_strength(), duration)

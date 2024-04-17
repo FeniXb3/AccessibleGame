@@ -11,11 +11,13 @@ signal deadzone_changed(new_value: float)
 		if not is_togglable == new_value:
 			is_togglable = new_value
 			togglable_changed.emit(is_togglable)
+			emit_changed()
 @export var deadzone: float:
 	set(new_value):
 		if not deadzone == new_value:
 			deadzone = new_value
 			deadzone_changed.emit(deadzone)
+			emit_changed()
 @export var events: Array[InputEvent] = []
 
 func has_event(event: InputEvent) -> bool:
@@ -23,6 +25,9 @@ func has_event(event: InputEvent) -> bool:
 
 func add_event(event: InputEvent) -> void:
 	events.append(event)
+	emit_changed()
+
 
 func remove_event(event: InputEvent) -> void:
 	events.erase(event)
+	emit_changed()
