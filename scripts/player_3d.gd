@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := InputEnhancer.get_axis("move_forward", "move_back")
-	var input_rotation := InputEnhancer.get_axis("rotate_left", "rotate_right") * delta
+	var input_dir := EnhancedInput.get_axis("move_forward", "move_back")
+	var input_rotation := EnhancedInput.get_axis("rotate_left", "rotate_right") * delta
 	character_rotation = _set_angle(character_rotation, min_angles.x, max_angles.x, input_rotation)
 	transform.basis = Basis(Vector3.UP, character_rotation)
 	var direction := (transform.basis * Vector3(0, 0, input_dir))#.normalized()
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	# Based on https://stackoverflow.com/a/77147323/1816426
-	var camera_rotation := InputEnhancer.get_vector("camera_rotate_left", "camera_rotate_right", "camera_rotate_up", "camera_rotate_down") * delta
+	var camera_rotation := EnhancedInput.get_vector("camera_rotate_left", "camera_rotate_right", "camera_rotate_up", "camera_rotate_down") * delta
 	camera_angles.x =_set_angle(camera_angles.x, min_angles.x, max_angles.x, camera_rotation.x)
 	camera_angles.y =_set_angle(camera_angles.y, min_angles.y, max_angles.y, camera_rotation.y)
 

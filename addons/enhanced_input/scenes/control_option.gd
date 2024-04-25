@@ -22,7 +22,7 @@ func _ready():
 	action_data.togglable_changed.connect(_on_action_data_togglable_changed)
 	action_data.deadzone_changed.connect(_on_action_data_deadzone_changed)
 
-	is_toggle_check.button_pressed = action_data.is_togglable#InputEnhancer.get_togglable(action)
+	is_toggle_check.button_pressed = action_data.is_togglable#EnhancedInput.get_togglable(action)
 	deadzone_spin_box.value = action_data.deadzone
 	deadzone_spin_box.hide()
 
@@ -100,7 +100,7 @@ func _filter_events_by_type(e: InputEvent):
 
 func _on_is_toggle_check_toggled(toggled_on):
 	EnhancedInputMap.set_togglable(action, toggled_on)
-	InputEnhancer.reset_toggle_state(action)
+	EnhancedInput.reset_toggle_state(action)
 
 
 func _on_deadzone_spin_box_value_changed(value):

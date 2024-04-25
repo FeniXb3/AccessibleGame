@@ -1,4 +1,4 @@
-#class_name InputEnhancer
+#class_name EnhancedInput
 extends Node
 
 static var mouse_motion: Vector2
@@ -90,7 +90,7 @@ func _reset_mouse_motion() -> void:
 
 
 static func filter_mouse_motion(e) -> bool:
-	print(InputEnhancer.mouse_motion)
+	print(EnhancedInput.mouse_motion)
 	if e is InputEventMouseMotion:
 		var axis_index := -1
 		if abs(e.relative.x) > abs(e.relative.y):

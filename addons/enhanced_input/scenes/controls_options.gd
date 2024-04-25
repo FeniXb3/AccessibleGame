@@ -50,12 +50,12 @@ func _on_reset_input_scheme_button_pressed():
 	call_deferred("_reset_input_scheme")
 
 func _reset_input_scheme():
-	InputEnhancer.reset_input_scheme()
+	EnhancedInput.reset_input_scheme()
 
 
 func _on_vibration_test_timer_timeout():
 	for id in Input.get_connected_joypads():
-		InputEnhancer.start_joy_vibration(id, 1, 1, 0.2)
+		EnhancedInput.start_joy_vibration(id, 1, 1, 0.2)
 
 
 func _on_vibration_test_check_button_toggled(toggled_on):

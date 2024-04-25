@@ -29,7 +29,7 @@ func _input(event):
 	if not consume_input:
 		return
 
-	if InputEnhancer.is_joy_motion_in_deadzone(action, event):
+	if EnhancedInput.is_joy_motion_in_deadzone(action, event):
 		return
 
 	if event is InputEventMouseMotion and abs(event.relative.length()) < 10 :
@@ -58,7 +58,7 @@ func _input(event):
 
 	consume_input = false
 
-	InputEnhancer.replace_event(action, action_event, event)
+	EnhancedInput.replace_event(action, action_event, event)
 	remap_completed.emit(self, action_event, event)
 	action_event = event
 

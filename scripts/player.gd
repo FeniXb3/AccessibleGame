@@ -24,20 +24,20 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		Input.stop_joy_vibration(0)
 		Input.stop_joy_vibration(1)
-		InputEnhancer.start_joy_vibration(last_used_device, 0.5, 0.5, 0.1)
+		EnhancedInput.start_joy_vibration(last_used_device, 0.5, 0.5, 0.1)
 
-	var direction = InputEnhancer.get_axis("move_left", "move_right")
+	var direction = EnhancedInput.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	var rotate_direction = InputEnhancer.get_axis("rotate_left", "rotate_right")
+	var rotate_direction = EnhancedInput.get_axis("rotate_left", "rotate_right")
 
 	rotate(deg_to_rad(rotate_direction))
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if InputEnhancer.is_joy_motion_in_deadzone("ui_left", event):
+	if EnhancedInput.is_joy_motion_in_deadzone("ui_left", event):
 		return
 	last_used_device = event.device
