@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmr4fji3qio5m"]
+[gd_scene load_steps=14 format=3 uid="uid://bmr4fji3qio5m"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ed7e5"]
 [ext_resource type="PackedScene" uid="uid://dwr1fc68qyhs6" path="res://addons/subtitles/subtitles_layer.tscn" id="2_xyd6l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0tq63gqtc2m" path="res://scenes/player_tpp.tscn" id="5_57v3v"]
 [ext_resource type="PackedScene" uid="uid://dnqogdff6uce6" path="res://addons/subtitles/subtitles_settings_handler.tscn" id="5_rhvi0"]
 [ext_resource type="Texture2D" uid="uid://b22av5chlgb4q" path="res://icon.png" id="6_3t6ys"]
+[ext_resource type="PackedScene" uid="uid://dtftavrdn8tv4" path="res://scenes/platform_3d.tscn" id="7_8fx31"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y0p6f"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -59,12 +60,23 @@ process_mode = 1
 
 [node name="PlayerTPP" parent="Gameplay3D" instance=ExtResource("5_57v3v")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Gameplay3D"]
+[node name="Floor" type="StaticBody3D" parent="Gameplay3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.140603, 0)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Gameplay3D/StaticBody3D"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Gameplay3D/Floor"]
 mesh = SubResource("PlaneMesh_4jg10")
 material = SubResource("StandardMaterial3D_q1mcy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Gameplay3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gameplay3D/Floor"]
 shape = SubResource("BoxShape3D_23lmm")
+
+[node name="Platform3D" parent="Gameplay3D" instance=ExtResource("7_8fx31")]
+
+[node name="Platform3D2" parent="Gameplay3D" instance=ExtResource("7_8fx31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.316705, 1.79188, -11.8098)
+
+[node name="Platform3D3" parent="Gameplay3D" instance=ExtResource("7_8fx31")]
+transform = Transform3D(0.602902, 0, 0.797816, 0, 1, 0, -0.797816, 0, 0.602902, -5.64473, 2.44882, -15.7498)
+
+[node name="Platform3D4" parent="Gameplay3D" instance=ExtResource("7_8fx31")]
+transform = Transform3D(0.0453281, 0, 0.998972, 0, 1, 0, -0.998972, 0, 0.0453281, -9.49752, 3.56447, -18.0397)
