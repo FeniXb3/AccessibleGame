@@ -30,7 +30,7 @@ func _ready():
 
 
 func _on_remove_action_event_pressed():
-	EnhancedInput.action_erase_event(action, action_remap_button.action_event)
+	EnhancedInputMap.action_erase_event(action, action_remap_button.action_event)
 	remove_button_pressed.emit(self)
 
 func invoke_remapping():

@@ -58,7 +58,7 @@ func _input(event):
 
 	consume_input = false
 
-	EnhancedInput.replace_event(action, action_event, event)
+	EnhancedInputMap.replace_event(action, action_event, event)
 	remap_completed.emit(self, action_event, event)
 	action_event = event
 
