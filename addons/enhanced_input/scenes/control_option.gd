@@ -18,7 +18,7 @@ var consume_input : bool
 
 func _ready():
 	label.text = action
-	action_data = InputEnhancer.get_action_data(action)
+	action_data = EnhancedInputMap.get_action_data(action)
 	action_data.togglable_changed.connect(_on_action_data_togglable_changed)
 	action_data.deadzone_changed.connect(_on_action_data_deadzone_changed)
 
@@ -99,8 +99,9 @@ func _filter_events_by_type(e: InputEvent):
 
 
 func _on_is_toggle_check_toggled(toggled_on):
-	InputEnhancer.set_togglable(action, toggled_on)
+	EnhancedInputMap.set_togglable(action, toggled_on)
+	InputEnhancer.reset_toggle_state(action)
 
 
 func _on_deadzone_spin_box_value_changed(value):
-	InputEnhancer.set_deadzone(action, value)
+	EnhancedInputMap.set_deadzone(action, value)

@@ -16,13 +16,13 @@ extends PanelContainer
 	}
 
 func _ready():
-	InputEnhancer.loaded.connect(_on_input_scheme_loaded)
+	EnhancedInputMap.loaded.connect(_on_input_scheme_loaded)
 
 
 func _on_input_scheme_loaded():
-	var input_scheme := InputEnhancer.input_scheme
-	vibration_strength_range_float_option.variable = InputEnhancer.input_scheme.vibration_strength
-	for action_data in InputEnhancer.input_scheme.actions:
+	var input_scheme := EnhancedInputMap.input_scheme
+	vibration_strength_range_float_option.variable = EnhancedInputMap.input_scheme.vibration_strength
+	for action_data in EnhancedInputMap.input_scheme.actions:
 		if action_data.events.is_empty():
 			continue
 

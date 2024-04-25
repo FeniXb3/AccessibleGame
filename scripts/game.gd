@@ -4,7 +4,7 @@ extends Node
 
 
 func _ready():
-	InputEnhancer.load_input_scheme()
+	EnhancedInputMap.load_input_scheme()
 	options_container.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
