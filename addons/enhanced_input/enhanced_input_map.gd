@@ -159,3 +159,37 @@ static func save_default_scheme() -> void:
 		input_map_scheme.add_axis(axes[axis])
 
 	ResourceSaver.save(input_map_scheme, default_path)
+
+static func are_relative_directions_same(relative, other_relative):
+	var axis_index := -1
+	if abs(relative.x) > abs(relative.y):
+		axis_index = Vector2.AXIS_X
+	else:
+		axis_index = Vector2.AXIS_Y
+
+	if not is_equal_approx(other_relative[axis_index], 0):
+		if is_equal_approx(signf(relative[axis_index]), signf(other_relative[axis_index])):
+			return true
+
+	return false
+
+static func get_actions_by_event(event: InputEvent) -> Array[String]:
+	var actions: Array[String] = []
+
+	for action_data in input_scheme.actions:
+		for e in action_data.events:
+			if e.get_class() == event.get_class() and are_good_enough(e, event, action_data.action):
+					actions.append(action_data.action)
+
+	return actions
+
+static func are_good_enough(e: InputEvent, event: InputEvent, action: StringName):
+	if event is InputEventMouseMotion:
+		return are_relative_directions_same(e.relative, event.relative)
+	elif event.is_match(wheel_down) and e.is_match(wheel_down) and Input.is_action_just_pressed(action):
+		return true
+	elif event.is_match(wheel_up) and e.is_match(wheel_up)and Input.is_action_just_pressed(action):
+		return true
+	else:
+		return e.is_match(event) and Input.is_action_just_pressed(action)
+
