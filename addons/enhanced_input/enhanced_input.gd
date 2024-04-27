@@ -33,10 +33,15 @@ static func get_axis(negative_action: StringName, positive_action: StringName) -
 	var togglable_axis_strength := get_action_strength(positive_action) - get_action_strength(negative_action)
 	return multiplier * clampf(togglable_axis_strength + wheel_axis + mouse_axis, -1.0, 1.0)
 
-static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
-	if Input.is_action_just_pressed(action) and EnhancedInputMap.get_togglable(action):
-		switch_toggled(action)
+static func is_action_just_pressed(action: StringName, exact_match: bool = false) -> bool:
+	if is_toggled(action):
+		return 1
+	else:
+		return Input.is_action_just_pressed(action, exact_match)
 
+
+
+static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
 	if is_toggled(action):
 		return 1
 	else:
