@@ -17,25 +17,17 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
 	if EnhancedInput.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input := EnhancedInput.get_vector("rotate_left", "rotate_right", "move_forward", "move_back")
-	#var input_dir := EnhancedInput.get_axis("move_forward", "move_back")
-	#var input_rotation := EnhancedInput.get_axis("rotate_left", "rotate_right") * delta
-	#character_rotation = _set_angle(character_rotation, min_angles.x, max_angles.x, input_rotation)
 	character_rotation = _set_angle(character_rotation, min_angles.x, max_angles.x, input.x * delta)
 
 	transform.basis = Basis(Vector3.UP, character_rotation)
-	var direction := (transform.basis * Vector3(0, 0, input.y))#.normalized()
-	#var direction := (transform.basis * Vector3(0, 0, input_dir))#.normalized()
+	var direction := (transform.basis * Vector3(0, 0, input.y))
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED

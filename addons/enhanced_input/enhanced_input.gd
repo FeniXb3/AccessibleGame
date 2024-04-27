@@ -1,4 +1,3 @@
-#class_name EnhancedInput
 extends Node
 
 static var mouse_motion: Vector2
@@ -20,9 +19,6 @@ static func get_mouse_wheel_axis(negative_action: StringName, positive_action: S
 
 static func get_mouse_motion_axis(negative_action: StringName, positive_action: StringName) -> float:
 	return get_action_mouse_motion(positive_action) - get_action_mouse_motion(negative_action)
-
-#static func get_mouse_motion_action(action: StringName)
-
 
 
 static func get_axis(negative_action: StringName, positive_action: StringName) -> float:
@@ -64,9 +60,6 @@ static func start_joy_vibration(device: int, weak_magnitude: float, strong_magni
 	Input.start_joy_vibration(device, weak_magnitude * EnhancedInputMap.get_vibration_strength(), strong_magnitude * EnhancedInputMap.get_vibration_strength(), duration)
 
 static func get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone: float = -1.0) -> Vector2:
-	# TODO think about better implementation
-	#var x := get_axis(negative_x, positive_x)
-	#var y := get_axis(negative_y, positive_y)
 	var x_multiplier := EnhancedInputMap.get_axis_multiplier(negative_x, positive_x)
 	var y_multiplier := EnhancedInputMap.get_axis_multiplier(negative_y, positive_y)
 
@@ -76,9 +69,6 @@ static func get_vector(negative_x: StringName, positive_x: StringName, negative_
 	)
 	print(toggle_vector)
 
-	# TODO: Handle mousemove
-	# TODO: Handle togglable
-	# TODO: Fix issue with sensitivity 0
 	var vector = Input.get_vector(negative_x, positive_x, negative_y, positive_y, deadzone)
 	vector.x += get_mouse_wheel_axis(negative_x, positive_x)
 	vector.y += get_mouse_wheel_axis(negative_y, positive_y)

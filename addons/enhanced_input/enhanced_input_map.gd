@@ -76,7 +76,6 @@ static func set_togglable(action: StringName, state: bool):
 static func set_deadzone(action: StringName, value: float) -> void:
 	InputMap.action_set_deadzone(action, value)
 	input_scheme.set_action_deadzone(action, value)
-	#save_current_scheme()
 
 static func get_action_data(action: StringName) -> InputMapActionData:
 	return input_scheme.get_action_data(action)
