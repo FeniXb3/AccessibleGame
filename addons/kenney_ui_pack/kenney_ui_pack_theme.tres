@@ -1,11 +1,10 @@
-[gd_resource type="Theme" load_steps=28 format=3 uid="uid://ba8i4rpswi2cf"]
+[gd_resource type="Theme" load_steps=27 format=3 uid="uid://ba8i4rpswi2cf"]
 
 [ext_resource type="Texture2D" uid="uid://ddsr7u0gk1l8r" path="res://addons/kenney_ui_pack/PNG/grey_button07.png" id="1_s0sux"]
 [ext_resource type="Texture2D" uid="uid://bc2n1qu50qdh5" path="res://addons/kenney_ui_pack/PNG/blue_button06.png" id="2_lmr31"]
 [ext_resource type="StyleBox" uid="uid://wovui2xdtehy" path="res://addons/kenney_ui_pack/focus_style_box_flat.tres" id="2_wkuf1"]
 [ext_resource type="Texture2D" uid="uid://cjjb4yvy34m2h" path="res://addons/kenney_ui_pack/PNG/blue_button07.png" id="3_naeuk"]
 [ext_resource type="Texture2D" uid="uid://c6hhncdcmld6v" path="res://addons/kenney_ui_pack/PNG/blue_button08.png" id="4_x04dm"]
-[ext_resource type="FontFile" uid="uid://d3wcl8wjfjcsn" path="res://addons/kenney_ui_pack/Font/kenvector_future_thin.ttf" id="5_mhhlw"]
 [ext_resource type="Texture2D" uid="uid://dk3p17n507c2h" path="res://addons/kenney_ui_pack/PNG/blue_button09.png" id="6_5gqs2"]
 [ext_resource type="Texture2D" uid="uid://vo72m0k2dqu1" path="res://addons/kenney_ui_pack/PNG/blue_sliderDown.png" id="6_6fum7"]
 [ext_resource type="Texture2D" uid="uid://dpxkpxxo8c5jo" path="res://addons/kenney_ui_pack/PNG/blue_button10.png" id="6_n5kvk"]
@@ -109,7 +108,6 @@ texture_margin_right = 9.0
 texture_margin_bottom = 6.0
 
 [resource]
-default_font = ExtResource("5_mhhlw")
 Button/colors/font_hover_color = Color(0.117647, 0.654902, 0.882353, 1)
 Button/styles/disabled = SubResource("StyleBoxTexture_r3w37")
 Button/styles/focus = ExtResource("2_wkuf1")
