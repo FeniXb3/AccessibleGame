@@ -75,6 +75,7 @@ static func get_vector(negative_x: StringName, positive_x: StringName, negative_
 	vector.x += get_mouse_motion_axis(negative_x, positive_x)
 	vector.y += get_mouse_motion_axis(negative_y, positive_y)
 	vector += toggle_vector
+	vector = vector.normalized()
 	vector.x *= x_multiplier
 	vector.y *= y_multiplier
 
