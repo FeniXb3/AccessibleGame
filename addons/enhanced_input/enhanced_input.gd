@@ -1,19 +1,19 @@
 extends Node
 
 static var mouse_motion: Vector2
-
 static var mouse_wheel_counters: Dictionary
-
+static var mouse_motion_relative_max: int = 10
+static var axis_max_value: float = 1.0
 static var action_toggle_state_map: Dictionary = {}
 
 static func get_mouse_wheel_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_value: float = 0
 
 	if EnhancedInputMap.action_has_mouse_wheel_event(negative_action) and Input.is_action_just_pressed(negative_action):
-		axis_value -= 1
+		axis_value -= axis_max_value
 
 	if EnhancedInputMap.action_has_mouse_wheel_event(positive_action) and Input.is_action_just_pressed(positive_action):
-		axis_value += 1
+		axis_value += axis_max_value
 
 	return axis_value
 
@@ -27,21 +27,21 @@ static func get_axis(negative_action: StringName, positive_action: StringName) -
 	var multiplier = EnhancedInputMap.get_axis_multiplier(negative_action, positive_action)
 
 	var togglable_axis_strength := get_action_strength(positive_action) - get_action_strength(negative_action)
-	return multiplier * clampf(togglable_axis_strength + wheel_axis + mouse_axis, -1.0, 1.0)
+	return multiplier * clampf(togglable_axis_strength + wheel_axis + mouse_axis, -axis_max_value, axis_max_value)
 
 static func is_action_just_pressed(action: StringName, exact_match: bool = false) -> bool:
 	if is_toggled(action):
-		return 1
-	else:
-		return Input.is_action_just_pressed(action, exact_match)
+		return axis_max_value
+
+	return Input.is_action_just_pressed(action, exact_match)
 
 
 
 static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
 	if is_toggled(action):
-		return 1
-	else:
-		return Input.get_action_strength(action, exact_match)
+		return axis_max_value
+
+	return Input.get_action_strength(action, exact_match)
 
 static func is_toggled(action: StringName) -> bool:
 	return EnhancedInputMap.get_togglable(action) and action_toggle_state_map.get(action, false)
@@ -67,7 +67,6 @@ static func get_vector(negative_x: StringName, positive_x: StringName, negative_
 			int(is_toggled(positive_x)) - int(is_toggled(negative_x)),
 			int(is_toggled(positive_y)) - int(is_toggled(negative_y))
 	)
-	print(toggle_vector)
 
 	var vector = Input.get_vector(negative_x, positive_x, negative_y, positive_y, deadzone)
 	vector.x += get_mouse_wheel_axis(negative_x, positive_x)
@@ -84,8 +83,8 @@ static func get_vector(negative_x: StringName, positive_x: StringName, negative_
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.relative.length() > 1:
-		var x := clampf(remap(event.relative.x, -10, 10, -1, 1), -1, 1)
-		var y := clampf(remap(event.relative.y, -10, 10, -1, 1), -1, 1)
+		var x := clampf(remap(event.relative.x, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value), -axis_max_value, axis_max_value)
+		var y := clampf(remap(event.relative.y, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value), -axis_max_value, axis_max_value)
 
 		mouse_motion = Vector2(x, y)
 	elif event.is_match(EnhancedInputMap.wheel_down):
@@ -115,8 +114,7 @@ static func filter_mouse_motion(e) -> bool:
 	return e is InputEventMouseMotion and EnhancedInputMap.are_relative_directions_same(e.relative, mouse_motion)
 
 static func get_action_mouse_motion(action: StringName) -> float:
-	var events := EnhancedInputMap.get_action_data(action).events.filter(filter_mouse_motion
-	)
+	var events := EnhancedInputMap.get_action_data(action).events.filter(filter_mouse_motion)
 
 	if events.size() == 0:
 		return 0
@@ -124,11 +122,7 @@ static func get_action_mouse_motion(action: StringName) -> float:
 	var value: float = 0.0
 
 	for e in events:
-		var axis_index := -1
-		if abs(e.relative.x) > abs(e.relative.y):
-			axis_index = Vector2.AXIS_X
-		else:
-			axis_index = Vector2.AXIS_Y
-
+		var axis_index := EnhancedInputMap.get_more_significant_axis(e.relative)
 		value += abs(mouse_motion[axis_index])
-	return minf(value, 1.0)
+
+	return minf(value, axis_max_value)

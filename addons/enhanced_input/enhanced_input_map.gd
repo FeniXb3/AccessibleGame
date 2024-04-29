@@ -8,8 +8,18 @@ static var loaded: Signal:
 
 static var saved_path := "user://input_map_scheme.tres"
 static var default_path := "res://default_input_map_scheme.tres"
-static var wheel_down: InputEventMouseButton
-static var wheel_up: InputEventMouseButton
+static var wheel_down: InputEventMouseButton:
+	get:
+		if not wheel_down:
+			wheel_down = InputEventMouseButton.new()
+			wheel_down.button_index = MOUSE_BUTTON_WHEEL_DOWN
+		return wheel_down
+static var wheel_up: InputEventMouseButton:
+	get:
+		if not wheel_up:
+			wheel_up = InputEventMouseButton.new()
+			wheel_up.button_index = MOUSE_BUTTON_WHEEL_UP
+		return wheel_up
 static var input_scheme : InputMapScheme
 static var mouse_motion_default_events := {
 	"camera_rotate_up": _create_mouse_motioon(Vector2.AXIS_Y, -1),
@@ -45,14 +55,6 @@ static func get_vibration_strength():
 	return input_scheme.vibration_strength.value
 
 static func action_has_mouse_wheel_event(action_name: StringName):
-	if not wheel_down:
-		wheel_down = InputEventMouseButton.new()
-		wheel_down.button_index = MOUSE_BUTTON_WHEEL_DOWN
-
-	if not wheel_up:
-		wheel_up = InputEventMouseButton.new()
-		wheel_up.button_index = MOUSE_BUTTON_WHEEL_UP
-
 	return (InputMap.action_has_event(action_name, wheel_down) \
 		or InputMap.action_has_event(action_name, wheel_up))
 
@@ -81,7 +83,6 @@ static func get_action_data(action: StringName) -> InputMapActionData:
 	return input_scheme.get_action_data(action)
 
 
-
 static func save_current_scheme() -> void:
 	ResourceSaver.save(input_scheme, saved_path)
 
@@ -95,11 +96,8 @@ static func reset_input_scheme() -> void:
 static func load_input_scheme() -> void:
 	if FileAccess.file_exists(saved_path):
 		input_scheme = InputMapScheme.load(saved_path)
-		print("saved")
 	else:
-		print("default")
 		if not FileAccess.file_exists(default_path):
-			print("create default")
 			save_default_scheme()
 		input_scheme = InputMapScheme.load(default_path)
 
@@ -160,17 +158,16 @@ static func save_default_scheme() -> void:
 	ResourceSaver.save(input_map_scheme, default_path)
 
 static func are_relative_directions_same(relative, other_relative):
-	var axis_index := -1
-	if abs(relative.x) > abs(relative.y):
-		axis_index = Vector2.AXIS_X
-	else:
-		axis_index = Vector2.AXIS_Y
+	var axis_index := get_more_significant_axis(relative)
 
-	if not is_equal_approx(other_relative[axis_index], 0):
-		if is_equal_approx(signf(relative[axis_index]), signf(other_relative[axis_index])):
-			return true
+	if is_equal_approx(other_relative[axis_index], 0):
+		return false
 
-	return false
+	return is_equal_approx(signf(relative[axis_index]), signf(other_relative[axis_index]))
+
+
+static func get_more_significant_axis(vector: Vector2) -> float:
+	return Vector2.AXIS_X if abs(vector.x) > abs(vector.y) else Vector2.AXIS_Y
 
 static func get_actions_by_event(event: InputEvent) -> Array[String]:
 	var actions: Array[String] = []
@@ -178,17 +175,13 @@ static func get_actions_by_event(event: InputEvent) -> Array[String]:
 	for action_data in input_scheme.actions:
 		for e in action_data.events:
 			if e.get_class() == event.get_class() and are_good_enough(e, event, action_data.action):
-					actions.append(action_data.action)
+				actions.append(action_data.action)
 
 	return actions
 
 static func are_good_enough(e: InputEvent, event: InputEvent, action: StringName):
 	if event is InputEventMouseMotion:
 		return are_relative_directions_same(e.relative, event.relative)
-	elif event.is_match(wheel_down) and e.is_match(wheel_down) and Input.is_action_just_pressed(action):
-		return true
-	elif event.is_match(wheel_up) and e.is_match(wheel_up)and Input.is_action_just_pressed(action):
-		return true
 	else:
 		return e.is_match(event) and Input.is_action_just_pressed(action)
 
