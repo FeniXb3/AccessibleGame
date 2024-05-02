@@ -38,15 +38,18 @@ use_hidden_tabs_for_min_size = true
 auto_translate_mode = 1
 layout_mode = 2
 size_flags_horizontal = 0
+metadata/_tab_index = 0
 
 [node name="SubtitlesOptions" parent="VBoxContainer/TabContainer" instance=ExtResource("2_l7pju")]
 auto_translate_mode = 1
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="ControlsOptions" parent="VBoxContainer/TabContainer" instance=ExtResource("3_h4oan")]
 auto_translate_mode = 1
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
