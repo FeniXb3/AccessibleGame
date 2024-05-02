@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg0tq63gqtc2m"]
+[gd_scene load_steps=8 format=3 uid="uid://cg0tq63gqtc2m"]
 
 [ext_resource type="Script" path="res://scripts/player_3d.gd" id="1_chttt"]
 [ext_resource type="Texture2D" uid="uid://b22av5chlgb4q" path="res://icon.png" id="2_ds5ce"]
+[ext_resource type="PackedScene" uid="uid://cov24xk7vtl7a" path="res://addons/kaykit_character_pack_adventures/Characters/gltf/Rogue_Hooded.glb" id="2_ikeg7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoux"]
 
@@ -20,8 +21,12 @@ script = ExtResource("1_chttt")
 min_angles = Vector2(-360, -90)
 max_angles = Vector2(360, 30)
 
+[node name="Model" parent="." instance=ExtResource("2_ikeg7")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.37495, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_pyoux")
 surface_material_override/0 = SubResource("StandardMaterial3D_ppqb0")
 
@@ -36,6 +41,7 @@ visible = false
 mesh = SubResource("SphereMesh_ghnm6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.395469, 0)
 shape = SubResource("CapsuleShape3D_uxwn5")
 
 [node name="CameraRootOffset" type="Node3D" parent="."]
@@ -48,7 +54,7 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraRootOffset/HorizontalPivot/VerticalPivot"]
-spring_length = 3.0
+spring_length = 5.0
 margin = 0.5
 
 [node name="CameraLeafOffset" type="Node3D" parent="CameraRootOffset/HorizontalPivot/VerticalPivot/SpringArm3D"]

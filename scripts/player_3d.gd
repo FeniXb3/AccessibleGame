@@ -8,17 +8,32 @@ extends CharacterBody3D
 
 @onready var horizontal_pivot: Node3D = %HorizontalPivot
 @onready var vertical_pivot: Node3D = %VerticalPivot
-
+@onready var model: Node3D = $Model
+var animation_player: AnimationPlayer
+var animations_to_loop := [
+	"Idle",
+	"Running_A",
+	"Jump_Idle",
+	"Walking_Backwards",
+]
+var was_on_floor_last_frame := false
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 5.5
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	animation_player = model.find_child("AnimationPlayer")
+	for animation_name in animations_to_loop:
+		animation_player.get_animation(animation_name).loop_mode = Animation.LOOP_LINEAR
+
+	animation_player.play("Idle")
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
 
 	if EnhancedInput.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -43,7 +58,29 @@ func _physics_process(delta: float) -> void:
 	horizontal_pivot.basis = Basis(Vector3.UP, camera_angles.x)
 	vertical_pivot.basis = Basis(Vector3.RIGHT, camera_angles.y)
 
+	update_animation(direction, input)
+	was_on_floor_last_frame = is_on_floor()
 	move_and_slide()
+
+func update_animation(direction: Vector3, input: Vector2) -> void:
+	print(velocity.y)
+	if not was_on_floor_last_frame and is_on_floor():
+		animation_player.play("Jump_Land", 0.1)
+		print ("jump land")
+	elif is_on_floor():
+		if velocity.y > 0:
+			animation_player.play("Jump_Start", 0.1)
+			#animation_player.queue("Jump_Idle")
+			print ("jump start")
+		elif input.y < 0:
+			animation_player.play("Running_A", 0.5)
+		elif input.y > 0:
+			animation_player.play("Walking_Backwards", 0.5)
+		else:
+			animation_player.play("Idle", 0.5)
+	#elif is_zero_approx(velocity.y):
+	else:
+		animation_player.queue("Jump_Idle")
 
 func _set_angle(current_angle, min_angle, max_angle, input_rotation):
 	var new_angle = wrapf(current_angle, -PI, PI) + input_rotation
