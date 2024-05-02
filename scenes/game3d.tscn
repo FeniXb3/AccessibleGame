@@ -45,6 +45,7 @@ shadow_enabled = true
 process_mode = 1
 
 [node name="SubtitlesContainer" parent="CanvasLayer2" instance=ExtResource("2_xyd6l")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 2
