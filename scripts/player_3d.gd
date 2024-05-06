@@ -41,7 +41,8 @@ func _physics_process(delta: float) -> void:
 	var input := EnhancedInput.get_vector("rotate_left", "rotate_right", "move_forward", "move_back")
 	character_rotation = _set_angle(character_rotation, min_angles.x, max_angles.x, input.x * delta)
 
-	transform.basis = Basis(Vector3.UP, character_rotation)
+	var new_transform_basis := Basis(Vector3.UP, character_rotation)
+	transform.basis = transform.basis.slerp(new_transform_basis, 0.5)
 	var direction := (transform.basis * Vector3(0, 0, input.y))
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -55,8 +56,11 @@ func _physics_process(delta: float) -> void:
 	camera_angles.x =_set_angle(camera_angles.x, min_angles.x, max_angles.x, camera_rotation.x)
 	camera_angles.y =_set_angle(camera_angles.y, min_angles.y, max_angles.y, camera_rotation.y)
 
-	horizontal_pivot.basis = Basis(Vector3.UP, camera_angles.x)
-	vertical_pivot.basis = Basis(Vector3.RIGHT, camera_angles.y)
+	# Checck https://forum.godotengine.org/t/how-to-rotate-an-object-towards-another-object/2007/2
+	var new_horizontal_pivot_basis := Basis(Vector3.UP, camera_angles.x)
+	var new_vertical_pivot_basis = Basis(Vector3.RIGHT, camera_angles.y)
+	horizontal_pivot.basis = horizontal_pivot.basis.slerp(new_horizontal_pivot_basis, 0.5)
+	vertical_pivot.basis = vertical_pivot.basis.slerp(new_vertical_pivot_basis, 0.5)
 
 	update_animation(direction, input)
 	was_on_floor_last_frame = is_on_floor()
