@@ -1,12 +1,13 @@
 extends Node
 
-static var mouse_motion: Vector2
-static var mouse_wheel_counters: Dictionary
-static var mouse_motion_relative_max: int = 10
-static var axis_max_value: float = 1.0
-static var action_toggle_state_map: Dictionary = {}
 
-static func get_mouse_wheel_axis(negative_action: StringName, positive_action: StringName) -> float:
+var mouse_motion: Vector2
+var mouse_wheel_counters: Dictionary
+var mouse_motion_relative_max: int = 10
+var axis_max_value: float = 1.0
+var action_toggle_state_map: Dictionary = {}
+
+func get_mouse_wheel_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_value: float = 0
 
 	if EnhancedInputMap.action_has_mouse_wheel_event(negative_action) and Input.is_action_just_pressed(negative_action):
@@ -17,11 +18,11 @@ static func get_mouse_wheel_axis(negative_action: StringName, positive_action: S
 
 	return axis_value
 
-static func get_mouse_motion_axis(negative_action: StringName, positive_action: StringName) -> float:
+func get_mouse_motion_axis(negative_action: StringName, positive_action: StringName) -> float:
 	return get_action_mouse_motion(positive_action) - get_action_mouse_motion(negative_action)
 
 
-static func get_axis(negative_action: StringName, positive_action: StringName) -> float:
+func get_axis(negative_action: StringName, positive_action: StringName) -> float:
 	var wheel_axis = get_mouse_wheel_axis(negative_action, positive_action)
 	var mouse_axis = get_mouse_motion_axis(negative_action, positive_action)
 	var multiplier = EnhancedInputMap.get_axis_multiplier(negative_action, positive_action)
@@ -29,7 +30,7 @@ static func get_axis(negative_action: StringName, positive_action: StringName) -
 	var togglable_axis_strength := get_action_strength(positive_action) - get_action_strength(negative_action)
 	return multiplier * clampf(togglable_axis_strength + wheel_axis + mouse_axis, -axis_max_value, axis_max_value)
 
-static func is_action_just_pressed(action: StringName, exact_match: bool = false) -> bool:
+func is_action_just_pressed(action: StringName, exact_match: bool = false) -> bool:
 	if is_toggled(action):
 		return axis_max_value
 
@@ -37,29 +38,29 @@ static func is_action_just_pressed(action: StringName, exact_match: bool = false
 
 
 
-static func get_action_strength(action: StringName, exact_match: bool = false) -> float:
+func get_action_strength(action: StringName, exact_match: bool = false) -> float:
 	if is_toggled(action):
 		return axis_max_value
 
 	return Input.get_action_strength(action, exact_match)
 
-static func is_toggled(action: StringName) -> bool:
+func is_toggled(action: StringName) -> bool:
 	return EnhancedInputMap.get_togglable(action) and action_toggle_state_map.get(action, false)
 
-static func switch_toggled(action: StringName) -> void:
+func switch_toggled(action: StringName) -> void:
 	action_toggle_state_map[action] = not action_toggle_state_map.get(action, false)
 
-static func reset_toggle_state(action:  StringName) -> void:
+func reset_toggle_state(action:  StringName) -> void:
 	action_toggle_state_map[action] = false
 
 
-static func is_joy_motion_in_deadzone(action: StringName, event: InputEvent):
+func is_joy_motion_in_deadzone(action: StringName, event: InputEvent):
 	return event is InputEventJoypadMotion and absf(event.axis_value) < InputMap.action_get_deadzone(action)
 
-static func start_joy_vibration(device: int, weak_magnitude: float, strong_magnitude: float, duration: float = 0) -> void:
+func start_joy_vibration(device: int, weak_magnitude: float, strong_magnitude: float, duration: float = 0) -> void:
 	Input.start_joy_vibration(device, weak_magnitude * EnhancedInputMap.get_vibration_strength(), strong_magnitude * EnhancedInputMap.get_vibration_strength(), duration)
 
-static func get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone: float = -1.0) -> Vector2:
+func get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone: float = -1.0) -> Vector2:
 	var x_multiplier := EnhancedInputMap.get_axis_multiplier(negative_x, positive_x)
 	var y_multiplier := EnhancedInputMap.get_axis_multiplier(negative_y, positive_y)
 
@@ -110,10 +111,10 @@ func _reset_mouse_motion() -> void:
 	mouse_motion = Vector2.ZERO
 
 
-static func filter_mouse_motion(e) -> bool:
+func filter_mouse_motion(e) -> bool:
 	return e is InputEventMouseMotion and EnhancedInputMap.are_relative_directions_same(e.relative, mouse_motion)
 
-static func get_action_mouse_motion(action: StringName) -> float:
+func get_action_mouse_motion(action: StringName) -> float:
 	var events := EnhancedInputMap.get_action_data(action).events.filter(filter_mouse_motion)
 
 	if events.size() == 0:
