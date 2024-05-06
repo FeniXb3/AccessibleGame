@@ -84,7 +84,7 @@ func update_animation(direction: Vector3, input: Vector2) -> void:
 			animation_player.play("Idle", 0.5)
 	#elif is_zero_approx(velocity.y):
 	else:
-		animation_player.queue("Jump_Idle")
+		animation_player.play("Jump_Idle", 0.5)
 
 func _set_angle(current_angle, min_angle, max_angle, input_rotation):
 	var new_angle = wrapf(current_angle, -PI, PI) + input_rotation
