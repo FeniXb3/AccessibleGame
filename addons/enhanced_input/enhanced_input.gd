@@ -1,7 +1,10 @@
 extends Node
 
+@export var limit_mouse_motion: bool = false
+@export var mouse_velocity_reduction_scale: float = 100.0
 
 var mouse_motion: Vector2
+var mouse_velocity: Vector2
 var mouse_wheel_counters: Dictionary
 var mouse_motion_relative_max: int = 10
 var axis_max_value: float = 1.0
@@ -76,16 +79,24 @@ func get_vector(negative_x: StringName, positive_x: StringName, negative_y: Stri
 	vector.y += get_mouse_motion_axis(negative_y, positive_y)
 	vector += toggle_vector
 	vector = vector.normalized()
-	vector.x *= x_multiplier
-	vector.y *= y_multiplier
+	vector.x *= x_multiplier * mouse_velocity.x
+	vector.y *= y_multiplier * mouse_velocity.y
 
 	return vector
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and event.relative.length() > 1:
-		var x := clampf(remap(event.relative.x, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value), -axis_max_value, axis_max_value)
-		var y := clampf(remap(event.relative.y, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value), -axis_max_value, axis_max_value)
+		var x := remap(event.relative.x, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value)
+		var y := remap(event.relative.y, -mouse_motion_relative_max, mouse_motion_relative_max, -axis_max_value, axis_max_value)
+		x = clampf(x, -axis_max_value, axis_max_value)
+		y = clampf(y, -axis_max_value, axis_max_value)
+
+
+		if not limit_mouse_motion and event.velocity.length() >= Vector2.ONE.length():
+			var reduced_velocity = event.velocity.abs() / mouse_velocity_reduction_scale
+			mouse_velocity = reduced_velocity if reduced_velocity.length() >= Vector2.ONE.length() else Vector2.ONE
+			print(event.velocity)
 
 		mouse_motion = Vector2(x, y)
 	elif event.is_match(EnhancedInputMap.wheel_down):
@@ -109,6 +120,7 @@ func _input(event: InputEvent) -> void:
 
 func _reset_mouse_motion() -> void:
 	mouse_motion = Vector2.ZERO
+	mouse_velocity = Vector2.ONE
 
 
 func filter_mouse_motion(e) -> bool:
