@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var should_rotate := false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -32,9 +33,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	var rotate_direction = EnhancedInput.get_axis("rotate_left", "rotate_right")
+	if should_rotate:
+		var rotate_direction = EnhancedInput.get_axis("rotate_left", "rotate_right")
+		rotate(deg_to_rad(rotate_direction))
 
-	rotate(deg_to_rad(rotate_direction))
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
