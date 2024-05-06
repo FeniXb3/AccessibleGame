@@ -24,6 +24,29 @@ max_angles = Vector2(360, 30)
 [node name="Model" parent="." instance=ExtResource("2_ikeg7")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.37495, 0)
 
+[node name="Knife_Offhand" parent="Model/Rig/Skeleton3D" index="0"]
+transform = Transform3D(-0.999999, -1.17465e-07, 2.60635e-08, -7.18757e-08, -5.30967e-07, 0.999999, -1.957e-07, 0.999999, 6.23449e-07, 0.883132, 1.04926, -1.63329e-05)
+visible = false
+
+[node name="1H_Crossbow" parent="Model/Rig/Skeleton3D" index="1"]
+transform = Transform3D(-4.5731e-07, 4.00596e-08, -0.999999, -0.999999, -4.96539e-07, 3.978e-07, -4.43668e-07, 0.999999, -3.07174e-08, -0.778504, 1.04926, -0.0103745)
+visible = false
+
+[node name="2H_Crossbow" parent="Model/Rig/Skeleton3D" index="2"]
+transform = Transform3D(-4.5731e-07, 4.00596e-08, -0.999999, -0.999999, -4.96539e-07, 3.978e-07, -4.43668e-07, 0.999999, -3.07174e-08, -0.778504, 1.04926, -0.0103745)
+visible = false
+
+[node name="Knife" parent="Model/Rig/Skeleton3D" index="3"]
+transform = Transform3D(0.999999, 1.88247e-07, -4.39071e-07, -3.79561e-07, -7.95385e-07, -0.999999, -1.1747e-07, 0.999999, -7.42514e-07, -0.883132, 1.04926, -1.60515e-05)
+visible = false
+
+[node name="Throwable" parent="Model/Rig/Skeleton3D" index="4"]
+transform = Transform3D(0.999999, 2.0298e-07, -4.52757e-07, -3.93247e-07, -6.76176e-07, -0.999999, -1.32203e-07, 0.999999, -6.23305e-07, -0.883132, 1.04926, 0.18023)
+visible = false
+
+[node name="Rogue_Cape" parent="Model/Rig/Skeleton3D" index="5"]
+transform = Transform3D(1, 1.25214e-21, 0, -1.25214e-21, 1, 0, 0, 0, 1, 0, 1.21587, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 visible = false
@@ -60,3 +83,5 @@ margin = 0.5
 [node name="CameraLeafOffset" type="Node3D" parent="CameraRootOffset/HorizontalPivot/VerticalPivot/SpringArm3D"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraRootOffset/HorizontalPivot/VerticalPivot/SpringArm3D/CameraLeafOffset"]
+
+[editable path="Model"]
