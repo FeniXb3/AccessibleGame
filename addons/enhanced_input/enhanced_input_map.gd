@@ -61,8 +61,8 @@ static func action_has_mouse_wheel_event(action_name: StringName):
 static func get_axis_multiplier(negative_action: StringName, positive_action: StringName) -> float:
 	var axis_data = input_scheme.get_axis_data(negative_action, positive_action)
 	var multiplier = 1 if not axis_data \
-			else axis_data.sensitivity.value \
-			* (-1 if axis_data.is_inverted.value else 1)
+		else axis_data.sensitivity.value \
+		* (-1 if axis_data.is_inverted.value else 1)
 
 	return multiplier
 
@@ -145,12 +145,12 @@ static func save_default_scheme() -> void:
 				else:
 					axes[axis_other_end].negative_action = action
 			elif action.ends_with(pair.positive):
-					var axis_other_end := action.replace(pair.positive, pair.negative)
-					if not axes.has(axis_other_end):
-						axes[action] = InputAxisData.new()
-						axes[action].positive_action = action
-					else:
-						axes[axis_other_end].positive_action = action
+				var axis_other_end := action.replace(pair.positive, pair.negative)
+				if not axes.has(axis_other_end):
+					axes[action] = InputAxisData.new()
+					axes[action].positive_action = action
+				else:
+					axes[axis_other_end].positive_action = action
 
 	for axis in axes:
 		input_map_scheme.add_axis(axes[axis])
