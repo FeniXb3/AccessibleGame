@@ -24,8 +24,8 @@ static var input_scheme : InputMapScheme
 static var mouse_motion_default_events := {
 	"camera_rotate_up": _create_mouse_motioon(Vector2.AXIS_Y, -1),
 	"camera_rotate_down": _create_mouse_motioon(Vector2.AXIS_Y, 1),
-	"camera_rotate_left": _create_mouse_motioon(Vector2.AXIS_X, -1),
-	"camera_rotate_right": _create_mouse_motioon(Vector2.AXIS_X, 1),
+	"rotate_left": _create_mouse_motioon(Vector2.AXIS_X, -1),
+	"rotate_right": _create_mouse_motioon(Vector2.AXIS_X, 1),
 }
 static var pairs := [
 	{"negative": "_left", "positive": "_right"},
