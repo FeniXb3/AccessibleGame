@@ -7,7 +7,8 @@ class_name InputMapScheme
 @export var axes: Array[InputAxisData] = []
 
 static func load(path: String) -> InputMapScheme:
-	var scheme := ResourceLoader.load(path, "InputMapScheme") as InputMapScheme
+	var scheme := ResourceLoader.load(path, "InputMapScheme", ResourceLoader.CACHE_MODE_IGNORE) as InputMapScheme
+
 	scheme._connect_sub_resources()
 
 	return scheme

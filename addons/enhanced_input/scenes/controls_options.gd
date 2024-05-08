@@ -47,10 +47,13 @@ func _on_reset_input_scheme_button_pressed():
 			for child in controls_parents[remap_filter].get_children():
 				child.queue_free()
 
+	for child in axis_data_parent.get_children():
+		child.queue_free()
+
 	call_deferred("_reset_input_scheme")
 
 func _reset_input_scheme():
-	EnhancedInput.reset_input_scheme()
+	EnhancedInputMap.reset_input_scheme()
 
 
 func _on_vibration_test_timer_timeout():
